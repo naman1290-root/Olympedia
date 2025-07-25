@@ -2,62 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Olympedia - Academic Olympiad Finder for India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive Olympiad finder with detailed information about academic competitions in India. Find olympiads by class, subject, difficulty, and more.">
+    <meta name="keywords" content="olympiad, academic competitions, SOF, mathematics, science, computer science, scholarships, India">
+    <title>Olympedia - Complete Academic Olympiad Platform</title>
+    
+    <!-- Performance and SEO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        /* Enhanced CSS Variables */
+        :root {
+            /* Brand Colors */
+            --primary-blue: #1e40af;
+            --primary-purple: #7c3aed;
+            --accent-orange: #f97316;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            
+            /* Semantic Colors */
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --surface-variant: #f1f5f9;
+            --on-surface: #1e293b;
+            --on-surface-variant: #64748b;
+            --border: #e2e8f0;
+            --border-focus: #3b82f6;
+            
+            /* Status Colors */
+            --success: #059669;
+            --warning: #d97706;
+            --error: #dc2626;
+            --info: #0284c7;
+            
+            /* Typography */
+            --font-display: 'Poppins', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            
+            /* Spacing Scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            /* Animation */
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+            --transition-slow: 350ms ease;
         }
 
-        :root {
-            --primary: #1e3a8a;
-            --secondary: #f97316;
-            --accent: #3b82f6;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --text: #334155;
+        /* Reset and Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
-            min-height: 100vh;
-            padding: 15px;
-            color: var(--text);
+            font-family: var(--font-body);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            touch-action: manipulation;
+            color: var(--on-surface);
+            background: var(--background);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 10px auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 12px 30px rgba(30, 41, 59, 0.15);
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
             overflow: hidden;
-            border: 1px solid #e2e8f0;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
-            padding: 35px 20px;
-            text-align: center;
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: var(--space-4);
+            background: var(--primary-blue);
             color: white;
+            padding: var(--space-3) var(--space-4);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            z-index: 1000;
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: var(--space-4);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+            color: white;
+            padding: var(--space-12) var(--space-4);
+            text-align: center;
             position: relative;
             overflow: hidden;
-            border-bottom: 4px solid var(--secondary);
         }
 
         .header::before {
@@ -67,16 +143,20 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 20%);
-            opacity: 0.8;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 20L100 0v20z' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+            background-size: 100px 20px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(-50px); }
         }
 
         .header-content {
             position: relative;
-            z-index: 1;
-            max-width: 800px;
+            z-index: 2;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -84,307 +164,234 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
         }
 
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 12px;
+        .logo-icon {
+            font-size: 3rem;
+            color: var(--accent-orange);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .logo h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
             letter-spacing: -0.02em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            background: linear-gradient(to right, #ffffff, #ffd6a8);
+            background: linear-gradient(45deg, #ffffff, #fbbf24);
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent;
         }
 
         .subtitle {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            font-weight: 300;
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            opacity: 0.95;
             max-width: 600px;
-            margin: 0 auto 25px;
-            color: #e2e8f0;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
         }
 
         .main-content {
-            padding: 30px 20px;
-            flex: 1;
+            padding: var(--space-12) 0;
         }
 
-        .info-banner {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            border: 1px solid #cbd5e1;
-            border-radius: 16px;
-            padding: 22px;
-            margin-bottom: 25px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        /* Enhanced Filter Panel */
+        .filter-panel {
+            background: var(--surface);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            margin-bottom: var(--space-12);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
         }
 
-        .info-banner::before {
-            content: '💡';
-            position: absolute;
-            top: 18px;
-            left: 18px;
-            font-size: 1.8rem;
-            color: var(--primary);
+        .filter-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
         }
 
-        .info-banner h3 {
-            color: var(--primary);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            margin-left: 50px;
+        .filter-header h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: var(--space-2);
+            font-weight: 600;
         }
 
-        .info-banner p {
-            color: var(--text);
-            line-height: 1.7;
-            margin-left: 50px;
-            font-size: 1.05rem;
+        .filter-header p {
+            color: var(--on-surface-variant);
+            font-size: 1.1rem;
         }
 
-        .selection-panel {
-            background: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 28px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(30, 41, 59, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .selection-panel:hover {
-            border-color: var(--accent);
-            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.12);
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .panel-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark);
-            letter-spacing: -0.01em;
-        }
-
-        .panel-header i {
-            color: var(--primary);
-            font-size: 1.8rem;
-            background: #e0f2fe;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
         }
 
         .form-group {
-            margin-bottom: 22px;
             position: relative;
         }
 
-        label {
+        .form-label {
             display: block;
-            margin-bottom: 12px;
             font-weight: 600;
-            color: var(--dark);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            letter-spacing: -0.01em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: var(--space-2);
+            color: var(--on-surface);
+            font-size: 0.95rem;
         }
 
-        label i {
-            color: var(--primary);
-            font-size: 1.1rem;
+        .form-label i {
+            margin-right: var(--space-2);
+            color: var(--primary-blue);
+            width: 16px;
         }
 
-        select {
+        .form-select, .form-input {
             width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #cbd5e1;
-            border-radius: 14px;
-            font-size: 16px;
-            background: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-family: inherit;
-            appearance: none;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%234b5563" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 18px center;
-            background-size: 16px;
-            padding-right: 50px;
-            font-weight: 500;
-            color: var(--dark);
+            padding: var(--space-4);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            background: var(--surface);
+            color: var(--on-surface);
+            transition: all var(--transition-normal);
         }
 
-        select:focus {
+        .form-select:focus, .form-input:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .filter-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 22px;
-            margin-bottom: 25px;
+        .form-select:hover, .form-input:hover {
+            border-color: var(--on-surface-variant);
         }
 
-        .find-btn {
-            background: linear-gradient(135deg, var(--secondary) 0%, #ea580c 100%);
+        /* Search Button */
+        .search-btn {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
             color: white;
             border: none;
-            padding: 18px 32px;
-            border-radius: 14px;
-            font-size: 18px;
-            font-weight: 700;
+            padding: var(--space-5) var(--space-8);
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.35);
+            transition: all var(--transition-normal);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: var(--space-2);
+            position: relative;
+            overflow: hidden;
         }
 
-        .find-btn::before {
+        .search-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.7s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
 
-        .find-btn:hover::before {
+        .search-btn:hover::before {
             left: 100%;
         }
 
-        .find-btn:hover, .find-btn:active {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.45);
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .results {
-            margin-top: 35px;
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Results Section */
+        .results-section {
+            margin-bottom: var(--space-12);
         }
 
         .results-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .results-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-8);
+            flex-wrap: wrap;
+            gap: var(--space-4);
         }
 
         .results-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--primary-blue);
+            font-weight: 600;
         }
 
-        .results-subtitle {
-            color: #64748b;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .category-section {
-            margin-bottom: 35px;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .category-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%);
-            color: white;
-            padding: 18px 25px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
+        .results-meta {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: var(--space-4);
+            flex-wrap: wrap;
         }
 
-        .category-header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15));
+        .results-count {
+            padding: var(--space-2) var(--space-4);
+            background: var(--surface-variant);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--on-surface-variant);
         }
 
+        .sort-dropdown {
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            color: var(--on-surface);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Olympiad Cards */
         .olympiad-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            background: #f8fafc;
-            padding: 25px;
-            border: 1px solid #e2e8f0;
-            border-top: none;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: var(--space-8);
         }
 
         .olympiad-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            height: fit-content;
+        }
+
+        .olympiad-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
 
         .olympiad-card::before {
@@ -392,1874 +399,1596 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(135deg, var(--accent), var(--primary));
+            right: 0;
+            height: 4px;
+            background: var(--card-accent, var(--primary-blue));
         }
 
-        .olympiad-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 25px rgba(30, 64, 175, 0.15);
-            border-color: #93c5fd;
+        .card-status {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .olympiad-name {
-            font-family: 'Montserrat', sans-serif;
+        .card-status.open {
+            background: var(--success);
+            color: white;
+        }
+
+        .card-status.closed {
+            background: var(--error);
+            color: white;
+        }
+
+        .card-status.upcoming {
+            background: var(--warning);
+            color: white;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--card-accent, var(--primary-blue));
+            flex-shrink: 0;
+        }
+
+        .card-title-group {
+            flex: 1;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--on-surface);
+            margin-bottom: var(--space-1);
             line-height: 1.3;
+        }
+
+        .card-subtitle {
+            color: var(--on-surface-variant);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .difficulty-badge {
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: var(--space-2);
+            display: inline-block;
+        }
+
+        .difficulty-easy {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .difficulty-medium {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .difficulty-hard {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .card-description {
+            color: var(--on-surface-variant);
+            line-height: 1.6;
+            margin-bottom: var(--space-6);
+            font-size: 0.95rem;
+        }
+
+        .card-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+            padding: var(--space-4);
+            background: var(--surface-variant);
+            border-radius: var(--radius-lg);
+        }
+
+        .meta-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: var(--space-2);
+            font-size: 0.9rem;
+            color: var(--on-surface-variant);
         }
 
-        .olympiad-name i {
-            color: var(--primary);
-            font-size: 1.3rem;
-            background: #e0f2fe;
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .meta-icon {
+            color: var(--primary-blue);
+            width: 16px;
+            flex-shrink: 0;
         }
 
-        .olympiad-details {
-            color: #475569;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-            flex-grow: 1;
+        .card-highlights {
+            margin-bottom: var(--space-6);
         }
 
-        .olympiad-meta {
+        .highlights-title {
+            font-weight: 600;
+            color: var(--on-surface);
+            margin-bottom: var(--space-3);
+            font-size: 0.9rem;
+        }
+
+        .highlights-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
+            gap: var(--space-2);
         }
 
-        .meta-badge {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--dark);
-            border: 1px solid #e2e8f0;
+        .highlight-tag {
+            padding: var(--space-1) var(--space-3);
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-blue);
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .card-actions {
+            margin-top: auto;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            gap: var(--space-3);
+            flex-wrap: wrap;
         }
 
-        .website-link {
-            background: linear-gradient(135deg, var(--secondary) 0%, #ea580c 100%);
-            color: white;
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 20px;
-            font-size: 1rem;
+        .btn {
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius-lg);
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 3px 8px rgba(249, 115, 22, 0.25);
+            justify-content: center;
+            gap: var(--space-2);
+            flex: 1;
+            min-width: 120px;
         }
 
-        .website-link:hover, .website-link:active {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.35);
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
         }
 
-        .no-results {
+        .btn-primary:hover {
+            background: var(--primary-purple);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--primary-blue);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-variant);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--on-surface-variant);
+            border-color: var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--surface-variant);
+            color: var(--on-surface);
+        }
+
+        /* Loading States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-16);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Empty States */
+        .empty-state {
             text-align: center;
-            color: #64748b;
-            font-size: 1.3rem;
-            padding: 50px 30px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-radius: 20px;
-            border: 2px dashed #cbd5e1;
-            margin: 20px 0;
+            padding: var(--space-16);
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            border: 2px dashed var(--border);
         }
 
-        .no-results i {
-            font-size: 3rem;
-            color: #94a3b8;
-            margin-bottom: 20px;
+        .empty-icon {
+            font-size: 4rem;
+            color: var(--on-surface-variant);
+            margin-bottom: var(--space-4);
+            opacity: 0.5;
         }
 
-        .post-12-section {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 30px;
-            border: 2px solid #fcd34d;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--on-surface);
+            margin-bottom: var(--space-2);
         }
 
-        .post-12-section::before {
-            content: '🚀';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3rem;
-            opacity: 0.15;
+        .empty-description {
+            color: var(--on-surface-variant);
+            margin-bottom: var(--space-6);
         }
 
-        .post-12-title {
-            color: #b45309;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .post-12-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-
-        .registration-info {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border: 2px solid var(--success);
-            border-radius: 20px;
-            padding: 25px;
-            margin-top: 35px;
-            position: relative;
-        }
-
-        .registration-info::before {
-            content: '📅';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.8rem;
-            color: #047857;
-        }
-
-        .registration-info h3 {
-            color: #065f46;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            margin-left: 60px;
-        }
-
-        .registration-info p {
-            color: #047857;
-            line-height: 1.7;
-            margin-left: 60px;
-            font-size: 1.05rem;
-        }
-
+        /* Footer */
         .footer {
-            background: var(--dark);
-            color: #cbd5e1;
-            padding: 30px 25px;
+            background: var(--on-surface);
+            color: white;
+            padding: var(--space-12) var(--space-4);
             text-align: center;
-            border-top: 1px solid #334155;
+            margin-top: var(--space-16);
         }
 
         .footer-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .help-message {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            color: #f8fafc;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .copyright {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 20px;
-        }
-
-        /* New enhanced features */
-        .stage-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .stage-timeline::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            border-radius: 3px;
-        }
-        
-        .stage-item {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 15px;
-            border-left: 4px solid var(--accent);
-            position: relative;
-        }
-        
-        .stage-item::before {
-            content: '';
-            position: absolute;
-            left: -27px;
-            top: 20px;
-            width: 15px;
-            height: 15px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid white;
-        }
-        
-        .stage-name {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .preparation-resources {
-            background: #f0fdf4;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            border: 1px solid #bbf7d0;
-        }
-        
-        .resource-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .prize-details {
-            background: #eff6ff;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-            border: 1px solid #bfdbfe;
-        }
-        
-        .badge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .date-badge {
-            background: white;
-            border-radius: 8px;
-            padding: 8px 12px;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .date-badge i {
-            color: var(--primary);
-        }
-        
-        .difficulty-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 8px;
-        }
-        
-        .beginner {
-            background: #dcfce7;
-            color: #166534;
-        }
-        
-        .intermediate {
-            background: #fef9c3;
-            color: #854d0e;
-        }
-        
-        .advanced {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-        
-        /* Tablet and Desktop Styles */
-        @media (min-width: 768px) {
-            .container {
-                margin: 15px auto;
-            }
-            
-            .header {
-                padding: 45px 30px;
-            }
-            
-            h1 {
-                font-size: 3.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.25rem;
-            }
-            
-            .main-content {
-                padding: 35px 30px;
-            }
-            
-            .filter-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 28px;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .filter-form {
+                grid-template-columns: 1fr;
             }
             
             .olympiad-grid {
-                grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+                grid-template-columns: 1fr;
             }
             
-            .resource-list {
-                grid-template-columns: 1fr 1fr;
+            .results-header {
+                flex-direction: column;
+                align-items: stretch;
             }
             
-            .olympiad-card {
-                padding: 28px;
+            .card-actions {
+                flex-direction: column;
             }
             
-            .olympiad-name {
-                font-size: 1.6rem;
-            }
-            
-            .help-message {
-                font-size: 2rem;
+            .btn {
+                flex: none;
             }
         }
 
-        /* Large Desktop */
-        @media (min-width: 1024px) {
-            .container {
-                margin: 20px auto;
-            }
-            
-            .header {
-                padding: 60px 40px;
-            }
-            
-            h1 {
-                font-size: 3.5rem;
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
 
-        /* Orientation adjustments */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .header {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-                margin-bottom: 8px;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-                margin-bottom: 15px;
-            }
-            
-            .info-banner {
-                padding: 15px;
+        @media (prefers-contrast: high) {
+            :root {
+                --border: #000000;
+                --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-trophy" style="font-size: 2.5rem;"></i>
-                    <h1>OLYMPEDIA</h1>
-                </div>
-                <p class="subtitle">Discover the perfect academic competitions for your educational journey in India</p>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-trophy logo-icon" aria-hidden="true"></i>
+                <h1>OLYMPEDIA</h1>
             </div>
+            <p class="subtitle">Your comprehensive guide to academic olympiad competitions in India</p>
         </div>
-        
-        <div class="main-content">
-            <div class="info-banner">
-                <h3>About Academic Olympiads</h3>
-                <p>Olympiads are prestigious competitive examinations that challenge students in Mathematics, Science, Computer Science, and other subjects. They provide pathways from school level to international competitions, fostering critical thinking and problem-solving skills essential for academic excellence.</p>
-            </div>
-            
-            <div class="selection-panel">
-                <div class="panel-header">
-                    <i class="fas fa-search"></i>
-                    <h2>Find Your Olympiad</h2>
+    </header>
+
+    <main id="main-content" class="main-content" role="main">
+        <div class="container">
+            <!-- Enhanced Filter Panel -->
+            <section class="filter-panel" aria-labelledby="filter-heading">
+                <div class="filter-header">
+                    <h2 id="filter-heading">Find Your Perfect Olympiad</h2>
+                    <p>Discover academic competitions that match your interests and academic level</p>
                 </div>
-                
-                <div class="filter-grid">
+
+                <form id="search-form" class="filter-form" role="search">
                     <div class="form-group">
-                        <label for="class-select"><i class="fas fa-graduation-cap"></i> Select Your Class Level:</label>
-                        <select id="class-select">
-                            <option value="">Choose your academic level...</option>
+                        <label for="class-level" class="form-label">
+                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            Class Level
+                        </label>
+                        <select id="class-level" name="classLevel" class="form-select" required>
+                            <option value="">Select your class...</option>
                             <option value="1-5">Classes 1-5 (Primary)</option>
                             <option value="6-8">Classes 6-8 (Middle School)</option>
                             <option value="9-10">Classes 9-10 (Secondary)</option>
                             <option value="11-12">Classes 11-12 (Senior Secondary)</option>
-                            <option value="post-12">Post Class 12 (College & Beyond)</option>
+                            <option value="post-12">Post Class 12</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label for="subject-select"><i class="fas fa-book"></i> Select Subject Area:</label>
-                        <select id="subject-select">
-                            <option value="">Choose subject area...</option>
-                            <option value="all">All Subjects</option>
-                            <option value="science">Science</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="computer">Computer Science</option>
-                            <option value="english">English</option>
-                            <option value="general">General Knowledge</option>
-                            <option value="astronomy">Astronomy</option>
-                            <option value="geography">Geography</option>
-                            <option value="biotechnology">Biotechnology</option>
+                        <label for="subject" class="form-label">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                            Subject
+                        </label>
+                        <select id="subject" name="subject" class="form-select" required>
+                            <option value="">Select subject...</option>
+                            <option value="Science">Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="English">English</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="General Knowledge">General Knowledge</option>
+                            <option value="Social Studies">Social Studies</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Astronomy & Astrophysics">Astronomy & Astrophysics</option>
+                            <option value="Earth Science">Earth Science</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="French">French</option>
+                            <option value="Reasoning & Aptitude">Reasoning & Aptitude</option>
+                            <option value="Essay Writing">Essay Writing</option>
+                            <option value="Drawing & Art">Drawing & Art</option>
+                            <option value="Biotechnology">Biotechnology</option>
+                            <option value="Informatics">Informatics</option>
+                            <option value="AI & Machine Learning">AI & Machine Learning</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Robotics">Robotics</option>
+                            <option value="Financial Literacy">Financial Literacy</option>
+                            <option value="Environmental Science">Environmental Science</option>
+                            <option value="Space Science">Space Science</option>
+                            <option value="Entrepreneurship">Entrepreneurship</option>
                         </select>
                     </div>
+
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <span>Search Olympiads</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" aria-labelledby="results-heading" aria-live="polite">
+                <div id="results-content">
+                    <!-- Results will be populated by JavaScript -->
                 </div>
-                
-                <button class="find-btn" onclick="findOlympiads()">
-                    <i class="fas fa-search"></i> Find My Olympiads
-                </button>
-            </div>
-            
-            <div id="results" class="results">
-                <div class="results-header">
-                    <h2 class="results-title">Welcome to Olympedia</h2>
-                    <p class="results-subtitle">Select your class level and subject to discover relevant academic competitions</p>
-                </div>
-                
-                <div class="category-section">
-                    <div class="category-header">
-                        <i class="fas fa-lightbulb"></i> Featured Olympiads
-                    </div>
-                    <div class="olympiad-grid">
-                        <div class="olympiad-card">
-                            <h3 class="olympiad-name"><i class="fas fa-atom"></i> National Science Olympiad</h3>
-                            <p class="olympiad-details">Prestigious science competition covering Physics, Chemistry, Biology and Environmental Science. Pathway to international science olympiads.</p>
-                            <div class="olympiad-meta">
-                                <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: School → International</div>
-                                <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: Class 1-12</div>
-                                <a href="https://sofworld.org/nso" target="_blank" class="website-link">
-                                    <i class="fas fa-external-link-alt"></i> Visit Website
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="olympiad-card">
-                            <h3 class="olympiad-name"><i class="fas fa-square-root-alt"></i> International Math Olympiad</h3>
-                            <p class="olympiad-details">Premier mathematics competition that challenges students with complex problem-solving and logical reasoning questions.</p>
-                            <div class="olympiad-meta">
-                                <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: School → International</div>
-                                <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: Class 1-12</div>
-                                <a href="https://sofworld.org/imo" target="_blank" class="website-link">
-                                    <i class="fas fa-external-link-alt"></i> Visit Website
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="olympiad-card">
-                            <h3 class="olympiad-name"><i class="fas fa-laptop-code"></i> National Cyber Olympiad</h3>
-                            <p class="olympiad-details">Computer science olympiad focusing on programming concepts, cybersecurity, and emerging technologies.</p>
-                            <div class="olympiad-meta">
-                                <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: School → National</div>
-                                <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: Class 1-12</div>
-                                <a href="https://sofworld.org/nco" target="_blank" class="website-link">
-                                    <i class="fas fa-external-link-alt"></i> Visit Website
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
-        
-        <div class="footer">
-            <div class="footer-content">
-                <div class="help-message">
-                    <i class="fas fa-heart"></i> HOPE THIS HELPS :D
-                </div>
-                <p class="copyright">© 2025 Olympedia. All rights reserved.</p>
-            </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2025 Olympedia. All rights reserved.</p>
         </div>
-    </div>
+    </footer>
 
     <script>
-        const olympiadData = {
-            "1-5": {
-                "science": [
-                    {
-                        name: "NSO (National Science Olympiad)",
-                        details: "Foundation-level science olympiad covering basic concepts in Physics, Chemistry, Biology, and Environmental Science. Designed to build scientific temperament from an early age with age-appropriate questions and activities.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nso",
-                        icon: "flask",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" },
-                            { name: "Level 2", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, laptops for top winners",
-                        preparation: {
-                            books: ["Science Olympiad Handbook", "NCERT Exemplar"],
-                            papers: "https://sofworld.org/nso/previous-papers",
-                            online: ["Olympiad Genius", "Olympiad Helper"]
-                        },
-                        difficulty: "beginner",
-                        important_dates: [
-                            { event: "Registration Deadline", date: "October 15" },
-                            { event: "Result Declaration", date: "February" }
+        // Enhanced Olympiad Database with All Subjects
+        const olympiadDatabase = {
+            olympiads: [
+                // SOF Olympiads
+                {
+                    id: "nso-2025",
+                    name: "National Science Olympiad",
+                    shortName: "NSO",
+                    subject: "Science",
+                    subjectAreas: ["Physics", "Chemistry", "Biology", "Environmental Science"],
+                    classes: {
+                        eligible: "1-12",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
                         ]
                     },
-                    {
-                        name: "GeoGenius Geography Olympiad",
-                        details: "National-level geography competition testing knowledge of Indian and world geography, maps, and environmental concepts. Focuses on developing spatial awareness and geographical reasoning.",
-                        level: "National",
-                        eligibility: "Class 2-12",
-                        organizer: "GeoGenius Foundation",
-                        website: "https://geogeniusindia.org",
-                        icon: "globe-asia",
-                        stages: [
-                            { name: "School Level", type: "Objective", month: "September" }
-                        ],
-                        fees: "₹100 per student",
-                        prizes: "Certificates, medals, educational trips",
-                        difficulty: "beginner"
-                    }
-                ],
-                "mathematics": [
-                    {
-                        name: "IMO (International Math Olympiad - SOF)",
-                        details: "Primary level mathematics olympiad focusing on arithmetic, basic geometry, logical reasoning, and problem-solving skills. Includes puzzles and mathematical games appropriate for young learners to develop numerical literacy.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/imo",
-                        icon: "calculator",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "December" },
-                            { name: "Level 2", type: "Subjective", month: "February" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, scholarships",
-                        difficulty: "beginner"
+                    examStructure: {
+                        levels: 2,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50,
+                            sections: [
+                                {name: "Logical Reasoning", questions: 15},
+                                {name: "Science", questions: 35}
+                            ]
+                        },
+                        level2: {
+                            duration: "60 minutes", 
+                            questions: 50,
+                            qualificationCriteria: "Top 5% from Level 1"
+                        }
                     },
-                    {
-                        name: "Ramanujan Math Competition",
-                        details: "Innovative mathematics competition focusing on creative problem-solving for young students. Emphasizes conceptual understanding over rote learning.",
-                        level: "National",
-                        eligibility: "Class 1-8",
-                        organizer: "AMTI (Association of Maths Teachers of India)",
-                        website: "https://www.amtionline.com",
-                        icon: "square-root-alt",
-                        stages: [
-                            { name: "Single Stage", type: "Creative Problems", month: "August" }
-                        ],
-                        fees: "₹150 per student",
-                        prizes: "Certificates, medals, math kits",
-                        difficulty: "intermediate"
-                    }
-                ],
-                "computer": [
-                    {
-                        name: "NCO (National Cyber Olympiad - SOF)",
-                        details: "Introduction to basic computer concepts, digital literacy, and fundamental IT skills. Covers computer basics, internet safety, simple programming concepts, and digital citizenship for young students.",
-                        level: "School → National",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nco",
-                        icon: "laptop-code",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, tech gadgets",
-                        difficulty: "beginner"
-                    }
-                ],
-                "english": [
-                    {
-                        name: "IEO (International English Olympiad)",
-                        details: "English language olympiad focusing on vocabulary building, basic grammar, reading comprehension, and fundamental writing skills. Includes storytelling and creative expression suitable for primary school students.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/ieo",
-                        icon: "book-open",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "October" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Certificates, books, scholarships",
-                        difficulty: "beginner"
-                    }
-                ],
-                "general": [
-                    {
-                        name: "IGO (International General Knowledge Olympiad)",
-                        details: "General awareness competition covering current affairs, history, geography, and basic science facts. Helps young students develop awareness about the world around them.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/igo",
-                        icon: "globe-asia",
-                        stages: [
-                            { name: "Single Stage", type: "Objective", month: "January" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Certificates, educational games",
-                        difficulty: "beginner"
-                    }
-                ]
-            },
-            "6-8": {
-                "science": [
-                    {
-                        name: "NSO (National Science Olympiad)",
-                        details: "Middle school science olympiad with increased complexity in Physics, Chemistry, Biology covering NCERT curriculum and beyond. Develops analytical thinking, scientific reasoning, and practical application of concepts.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nso",
-                        icon: "atom",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" },
-                            { name: "Level 2", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, laptops",
-                        difficulty: "intermediate"
+                    schedule: {
+                        registrationStart: "2025-07-01",
+                        registrationEnd: "2025-10-15",
+                        examDates: [
+                            {date: "2025-11-13", level: 1, description: "Level 1 - Set A"},
+                            {date: "2025-11-27", level: 1, description: "Level 1 - Set B"}, 
+                            {date: "2025-12-11", level: 1, description: "Level 1 - Set C"},
+                            {date: "2026-02-15", level: 2, description: "Level 2"}
+                        ]
                     },
-                    {
-                        name: "NSEJS (National Standard Exam - Junior Science)",
-                        details: "Gateway to Indian National Science Olympiad program. Multi-disciplinary exam covering Physics, Chemistry, Biology, and Mathematics. Tests conceptual understanding and analytical skills.",
-                        level: "National → International (via INO)",
-                        eligibility: "Class 9-10",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "microscope",
-                        stages: [
-                            { name: "NSEJS", type: "Objective", month: "November" },
-                            { name: "INO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per subject",
-                        prizes: "Selection for INO, scholarships",
-                        difficulty: "advanced"
-                    }
-                ],
-                "mathematics": [
-                    {
-                        name: "IMO (International Math Olympiad - SOF)",
-                        details: "Middle school mathematics covering pre-algebra, geometry, number theory, and intermediate problem-solving. Prepares students for higher-level mathematical competitions with structured reasoning exercises.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/imo",
-                        icon: "calculator",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "December" },
-                            { name: "Level 2", type: "Subjective", month: "February" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, scholarships",
-                        difficulty: "intermediate"
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
                     },
-                    {
-                        name: "PRMO (Pre-Regional Math Olympiad)",
-                        details: "Entry point for serious mathematics olympiad pathway. First stage towards representing India in International Mathematical Olympiad (IMO). Focuses on mathematical reasoning and proof techniques.",
-                        level: "National → International (via RMO, INMO)",
-                        eligibility: "Class 8-12",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.mtai.org.in/prmo",
-                        icon: "square-root-alt",
-                        stages: [
-                            { name: "PRMO", type: "Subjective", month: "August" },
-                            { name: "RMO", type: "Subjective", month: "October" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for RMO, certificates",
-                        difficulty: "advanced"
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹50,000",
+                            criteria: "Top 1% performers"
+                        }
                     },
-                    {
-                        name: "Ramanujan Math Competition",
-                        details: "Challenging mathematics competition focusing on creative problem-solving and mathematical exploration. Designed to identify and nurture mathematical talent in middle school students.",
-                        level: "National",
-                        eligibility: "Class 5-8",
-                        organizer: "AMTI (Association of Maths Teachers of India)",
-                        website: "https://www.amtionline.com",
-                        icon: "brain",
-                        stages: [
-                            { name: "Single Stage", type: "Creative Problems", month: "August" }
-                        ],
-                        fees: "₹150 per student",
-                        prizes: "Certificates, medals, math kits",
-                        difficulty: "intermediate"
-                    }
-                ],
-                "computer": [
-                    {
-                        name: "NCO (National Cyber Olympiad - SOF)",
-                        details: "Intermediate computer science concepts including programming fundamentals, basic algorithms, data organization, and introduction to emerging technologies like AI and robotics.",
-                        level: "School → National",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nco",
-                        icon: "laptop-code",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, tech gadgets",
-                        difficulty: "intermediate"
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/nso"
                     },
-                    {
-                        name: "Junior Hackathon",
-                        details: "Beginner-friendly coding competition where students solve real-world problems using basic programming concepts. Encourages computational thinking and teamwork.",
-                        level: "National",
-                        eligibility: "Class 5-8",
-                        organizer: "TechKids India",
-                        website: "https://techkidsindia.org",
-                        icon: "code",
-                        stages: [
-                            { name: "Online Round", type: "Project Submission", month: "March" },
-                            { name: "National Finals", type: "Live Coding", month: "May" }
-                        ],
-                        fees: "Free",
-                        prizes: "Certificates, coding kits, mentorship",
-                        difficulty: "beginner"
-                    }
-                ],
-                "english": [
-                    {
-                        name: "IEO (International English Olympiad)",
-                        details: "Advanced English language skills including literature appreciation, creative writing, advanced grammar concepts, and critical thinking through language. Emphasizes communication and expression.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/ieo",
-                        icon: "book-open",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "October" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Certificates, books, scholarships",
-                        difficulty: "intermediate"
-                    }
-                ],
-                "astronomy": [
-                    {
-                        name: "IAO (International Astronomy Olympiad)",
-                        details: "Introduction to astronomy and space science for middle school students. Covers basic concepts of celestial objects, solar system, and observational astronomy.",
-                        level: "School → International",
-                        eligibility: "Class 5-12",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "star",
-                        stages: [
-                            { name: "NSEA", type: "Objective", month: "November" },
-                            { name: "Orientation Camp", type: "Training", month: "April" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for international olympiad",
-                        difficulty: "intermediate"
-                    }
-                ],
-                "geography": [
-                    {
-                        name: "GeoGenius Geography Olympiad",
-                        details: "Comprehensive geography competition testing knowledge of physical, human, and environmental geography. Includes map-based questions and spatial analysis.",
-                        level: "National",
-                        eligibility: "Class 2-12",
-                        organizer: "GeoGenius Foundation",
-                        website: "https://geogeniusindia.org",
-                        icon: "map-marked-alt",
-                        stages: [
-                            { name: "School Level", type: "Objective", month: "September" },
-                            { name: "National Finals", type: "Subjective", month: "November" }
-                        ],
-                        fees: "₹100 per student",
-                        prizes: "Certificates, medals, educational trips",
-                        difficulty: "intermediate"
-                    }
-                ]
-            },
-            "9-10": {
-                "science": [
-                    {
-                        name: "NSO (National Science Olympiad)",
-                        details: "High school level science olympiad with board exam standard questions and beyond. Comprehensive coverage of Physics, Chemistry, Biology with practical applications and real-world problem solving.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nso",
-                        icon: "flask",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" },
-                            { name: "Level 2", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, laptops",
-                        difficulty: "intermediate"
+                    difficulty: "Medium",
+                    popularity: 95,
+                    participationCount: 500000,
+                    icon: "fas fa-flask",
+                    color: "#3b82f6",
+                    tags: ["Science", "NCERT-based", "Two-level", "International"],
+                    description: "The National Science Olympiad tests scientific reasoning and logical ability across Physics, Chemistry, Biology, and Environmental Science. It's a gateway to advanced scientific education and international competitions.",
+                    mode: "Offline"
+                },
+                {
+                    id: "imo-2025",
+                    name: "International Mathematics Olympiad",
+                    shortName: "IMO", 
+                    subject: "Mathematics",
+                    subjectAreas: ["Algebra", "Geometry", "Number Theory", "Combinatorics"],
+                    classes: {
+                        eligible: "1-12",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
                     },
-                    {
-                        name: "NSEJS (National Standard Exam - Junior Science)",
-                        details: "Gateway to Indian National Science Olympiad program. Multi-disciplinary exam covering Physics, Chemistry, Biology, and Mathematics. Tests conceptual understanding and analytical skills.",
-                        level: "National → International (via INO)",
-                        eligibility: "Class 9-10",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "microscope",
-                        stages: [
-                            { name: "NSEJS", type: "Objective", month: "November" },
-                            { name: "INO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per subject",
-                        prizes: "Selection for INO, scholarships",
-                        difficulty: "advanced"
+                    examStructure: {
+                        levels: 2,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
                     },
-                    {
-                        name: "INO (Indian National Olympiad)",
-                        details: "Elite science olympiad program leading to international representation in IPhO, IChO, IBO, etc. Requires qualification via NSEJS/NSEA/NSEP. Intensive training and mentorship provided.",
-                        level: "National → International (IPhO, IBO, etc.)",
-                        eligibility: "Qualify via NSEJS/NSEA/NSEP",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal",
-                        stages: [
-                            { name: "INO", type: "Subjective", month: "January" },
-                            { name: "OCSC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
+                    schedule: {
+                        registrationStart: "2025-07-01",
+                        registrationEnd: "2025-10-15", 
+                        examDates: [
+                            {date: "2025-11-12", level: 1, description: "Level 1 - Set A"},
+                            {date: "2025-11-28", level: 1, description: "Level 1 - Set B"},
+                            {date: "2025-12-12", level: 1, description: "Level 1 - Set C"}
+                        ]
                     },
-                    {
-                        name: "NSEA (National Standard Exam in Astronomy)",
-                        details: "Astronomy and astrophysics competition covering celestial mechanics, observational astronomy, and basic astrophysics concepts. Leads to International Astronomy Olympiad participation.",
-                        level: "National → International",
-                        eligibility: "Class 12 & below",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "star",
-                        stages: [
-                            { name: "NSEA", type: "Objective", month: "November" },
-                            { name: "INAO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for international olympiad",
-                        difficulty: "advanced"
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
                     },
-                    {
-                        name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
-                        details: "National fellowship program for students with research aptitude in basic sciences. Provides substantial scholarship, research opportunities, and mentorship in premier institutes like IISc and IISERs.",
-                        level: "National Fellowship",
-                        eligibility: "Class 10-12",
-                        organizer: "IISc (Indian Institute of Science)",
-                        website: "https://kvpy.iisc.ac.in",
-                        icon: "graduation-cap",
-                        stages: [
-                            { name: "Aptitude Test", type: "Objective", month: "November" },
-                            { name: "Interview", type: "Personal", month: "March" }
-                        ],
-                        fees: "₹1000 (SC/ST/PwD waived)",
-                        prizes: "Scholarship up to ₹7000/month",
-                        difficulty: "advanced"
-                    }
-                ],
-                "mathematics": [
-                    {
-                        name: "IMO (International Math Olympiad - SOF)",
-                        details: "Advanced mathematical problem-solving for secondary school students. Covers complex algebra, geometry, number theory, and combinatorics with emphasis on logical reasoning and proof construction.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/imo",
-                        icon: "calculator",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "December" },
-                            { name: "Level 2", type: "Subjective", month: "February" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, scholarships",
-                        difficulty: "intermediate"
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹75,000",
+                            criteria: "Top 1% performers"
+                        }
                     },
-                    {
-                        name: "PRMO (Pre-Regional Math Olympiad)",
-                        details: "Critical stage for mathematics olympiad aspirants. Success here leads to RMO and potential international representation. Focuses on mathematical creativity and problem-solving strategies.",
-                        level: "National → International (via RMO, INMO)",
-                        eligibility: "Class 8-12",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.mtai.org.in/prmo",
-                        icon: "square-root-alt",
-                        stages: [
-                            { name: "PRMO", type: "Subjective", month: "August" },
-                            { name: "RMO", type: "Subjective", month: "October" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for RMO, certificates",
-                        difficulty: "advanced"
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/imo"
                     },
-                    {
-                        name: "RMO (Regional Math Olympiad)",
-                        details: "Regional level mathematics olympiad for students who qualify PRMO. Gateway to Indian National Mathematical Olympiad (INMO). Requires advanced mathematical maturity and proof-writing skills.",
-                        level: "Regional → National",
-                        eligibility: "Qualify via PRMO",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "chart-line",
-                        stages: [
-                            { name: "RMO", type: "Subjective", month: "October" },
-                            { name: "INMO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "Selection for INMO",
-                        difficulty: "advanced"
+                    difficulty: "Hard",
+                    popularity: 92,
+                    participationCount: 450000,
+                    icon: "fas fa-calculator",
+                    color: "#f59e0b",
+                    tags: ["Mathematics", "Problem-solving", "Two-level", "International"],
+                    description: "Focus on logical & higher-order mathematics problems. Two-round format with international recognition and awards for mathematical excellence.",
+                    mode: "Offline"
+                },
+                {
+                    id: "ieo-2025",
+                    name: "International English Olympiad",
+                    shortName: "IEO",
+                    subject: "English",
+                    subjectAreas: ["Grammar", "Vocabulary", "Reading Comprehension", "Literature"],
+                    classes: {
+                        eligible: "1-12",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
                     },
-                    {
-                        name: "INMO (Indian National Math Olympiad)",
-                        details: "Premier mathematics competition in India. Top performers are selected for International Mathematical Olympiad (IMO) training camp. Tests advanced problem-solving and proof-writing abilities.",
-                        level: "National → International",
-                        eligibility: "Qualify via RMO",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal",
-                        stages: [
-                            { name: "INMO", type: "Subjective", month: "January" },
-                            { name: "IMOTC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
-                    }
-                ],
-                "computer": [
-                    {
-                        name: "NCO (National Cyber Olympiad - SOF)",
-                        details: "High-level computer science olympiad covering programming concepts, algorithms, data structures, cybersecurity fundamentals, and introduction to artificial intelligence and machine learning.",
-                        level: "School → National",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nco",
-                        icon: "laptop-code",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, tech gadgets",
-                        difficulty: "intermediate"
+                    examStructure: {
+                        levels: 2,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
                     },
-                    {
-                        name: "ZCO (Zonal Computing Olympiad)",
-                        details: "Programming olympiad focusing on algorithmic problem-solving and competitive programming. First step towards International Olympiad in Informatics (IOI). Requires strong programming and logical thinking skills.",
-                        level: "National → IOI",
-                        eligibility: "School students",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.iarcs.org.in/zco",
-                        icon: "code",
-                        stages: [
-                            { name: "ZCO", type: "Online Programming", month: "December" },
-                            { name: "INOI", type: "Advanced Programming", month: "February" }
-                        ],
-                        fees: "Free",
-                        prizes: "Selection for INOI",
-                        difficulty: "advanced"
+                    schedule: {
+                        registrationStart: "2025-06-01",
+                        registrationEnd: "2025-09-15",
+                        examDates: [
+                            {date: "2025-09-26", level: 1, description: "Level 1 - Set A"},
+                            {date: "2025-11-11", level: 1, description: "Level 1 - Set B"},
+                            {date: "2025-11-26", level: 1, description: "Level 1 - Set C"}
+                        ]
                     },
-                    {
-                        name: "INOI (Indian National Olympiad in Informatics)",
-                        details: "Premier programming competition in India. Top performers are selected for International Olympiad in Informatics (IOI) training camp. Tests advanced algorithmic problem-solving skills.",
-                        level: "National → International",
-                        eligibility: "Qualify via ZCO",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.iarcs.org.in/inoi",
-                        icon: "medal",
-                        stages: [
-                            { name: "INOI", type: "Programming", month: "February" },
-                            { name: "IOITC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
-                    }
-                ],
-                "astronomy": [
-                    {
-                        name: "NSEA (National Standard Exam in Astronomy)",
-                        details: "Comprehensive astronomy competition covering celestial mechanics, observational techniques, and astrophysics. Leads to International Astronomy Olympiad participation for top performers.",
-                        level: "National → International",
-                        eligibility: "Class 12 & below",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "star",
-                        stages: [
-                            { name: "NSEA", type: "Objective", month: "November" },
-                            { name: "INAO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for international olympiad",
-                        difficulty: "advanced"
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
                     },
-                    {
-                        name: "INAO (Indian National Astronomy Olympiad)",
-                        details: "Advanced astronomy competition for students who qualify NSEA. Covers astrophysics, cosmology, and observational techniques. Top performers represent India at international olympiads.",
-                        level: "National → International",
-                        eligibility: "Qualify via NSEA",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal",
-                        stages: [
-                            { name: "INAO", type: "Subjective", month: "January" },
-                            { name: "OCSC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
-                    }
-                ],
-                "biotechnology": [
-                    {
-                        name: "National Biotechnology Olympiad",
-                        details: "Competition testing knowledge of molecular biology, genetics, and biotechnological applications. Includes theoretical and practical components for aspiring biotechnologists.",
-                        level: "National",
-                        eligibility: "Class 9-12",
-                        organizer: "Biotech Research Society",
-                        website: "https://www.brs.org.in",
-                        icon: "dna",
-                        stages: [
-                            { name: "Theory Exam", type: "Objective", month: "October" },
-                            { name: "Practical Round", type: "Lab Skills", month: "December" }
-                        ],
-                        fees: "₹300 per student",
-                        prizes: "Certificates, lab internships",
-                        difficulty: "intermediate"
-                    }
-                ],
-                "geography": [
-                    {
-                        name: "GeoGenius Geography Olympiad",
-                        details: "Comprehensive geography competition testing advanced knowledge of physical, human, and environmental geography. Includes GIS applications and spatial analysis techniques.",
-                        level: "National",
-                        eligibility: "Class 2-12",
-                        organizer: "GeoGenius Foundation",
-                        website: "https://geogeniusindia.org",
-                        icon: "map-marked-alt",
-                        stages: [
-                            { name: "School Level", type: "Objective", month: "September" },
-                            { name: "National Finals", type: "Subjective", month: "November" }
-                        ],
-                        fees: "₹100 per student",
-                        prizes: "Certificates, medals, educational trips",
-                        difficulty: "intermediate"
-                    }
-                ]
-            },
-            "11-12": {
-                "science": [
-                    {
-                        name: "NSO (National Science Olympiad)",
-                        details: "Senior secondary science olympiad with advanced Physics, Chemistry, Biology concepts. Excellent preparation for competitive exams like JEE, NEET while developing research aptitude and scientific thinking.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nso",
-                        icon: "flask",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" },
-                            { name: "Level 2", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, laptops",
-                        difficulty: "intermediate"
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹40,000",
+                            criteria: "Top 1% performers"
+                        }
                     },
-                    {
-                        name: "NSEJS (National Standard Exam - Junior Science)",
-                        details: "Final opportunity for NSEJS participation. Multi-disciplinary science exam that can lead to international science olympiad representation. Gateway to prestigious research opportunities.",
-                        level: "National → International (via INO)",
-                        eligibility: "Class 9-10",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "microscope",
-                        stages: [
-                            { name: "NSEJS", type: "Objective", month: "November" },
-                            { name: "INO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per subject",
-                        prizes: "Selection for INO, scholarships",
-                        difficulty: "advanced"
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/ieo"
                     },
-                    {
-                        name: "INO (Indian National Olympiad)",
-                        details: "Premier science olympiad program. Students can compete in Physics (IPhO), Chemistry (IChO), Biology (IBO), and Astronomy (IAO) olympiads. Intensive training with leading scientists and researchers.",
-                        level: "National → International (IPhO, IBO, etc.)",
-                        eligibility: "Qualify via NSEJS/NSEA/NSEP",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal",
-                        stages: [
-                            { name: "INO", type: "Subjective", month: "January" },
-                            { name: "OCSC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
+                    difficulty: "Medium",
+                    popularity: 88,
+                    participationCount: 400000,
+                    icon: "fas fa-language",
+                    color: "#10b981",
+                    tags: ["English", "Language Skills", "Two-level", "Communication"],
+                    description: "Assesses grammar, vocabulary, reading comprehension & expression skills. Level 2 qualification starts from Class 3.",
+                    mode: "Offline"
+                },
+                {
+                    id: "igko-2025",
+                    name: "International General Knowledge Olympiad",
+                    shortName: "IGKO",
+                    subject: "General Knowledge",
+                    subjectAreas: ["Current Affairs", "History", "Geography", "Science & Technology"],
+                    classes: {
+                        eligible: "1-10",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"}
+                        ]
                     },
-                    {
-                        name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
-                        details: "National fellowship program for students with research aptitude in basic sciences. Provides substantial scholarship, research opportunities, and mentorship in premier institutes like IISc and IISERs.",
-                        level: "National Fellowship",
-                        eligibility: "Class 11-12 & UG",
-                        organizer: "IISc (Indian Institute of Science)",
-                        website: "https://kvpy.iisc.ac.in",
-                        icon: "graduation-cap",
-                        stages: [
-                            { name: "Aptitude Test", type: "Objective", month: "November" },
-                            { name: "Interview", type: "Personal", month: "March" }
-                        ],
-                        fees: "₹1000 (SC/ST/PwD waived)",
-                        prizes: "Scholarship up to ₹7000/month",
-                        difficulty: "advanced"
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
                     },
-                    {
-                        name: "NSEP (National Standard Exam in Physics)",
-                        details: "Advanced physics competition covering classical and modern physics concepts. Leads to Indian National Physics Olympiad (INPhO) for potential international representation.",
-                        level: "National → International",
-                        eligibility: "Class 12 & below",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "atom",
-                        stages: [
-                            { name: "NSEP", type: "Objective", month: "November" },
-                            { name: "INPhO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for INPhO",
-                        difficulty: "advanced"
+                    schedule: {
+                        registrationStart: "2025-06-01",
+                        registrationEnd: "2025-09-15",
+                        examDates: [
+                            {date: "2025-09-25", level: 1, description: "Single Level - Set A"},
+                            {date: "2025-10-08", level: 1, description: "Single Level - Set B"},
+                            {date: "2025-11-07", level: 1, description: "Single Level - Set C"}
+                        ]
                     },
-                    {
-                        name: "NSEB (National Standard Exam in Biology)",
-                        details: "Comprehensive biology competition covering molecular biology, genetics, ecology, and evolution. Leads to Indian National Biology Olympiad (INBO) for potential international representation.",
-                        level: "National → International",
-                        eligibility: "Class 12 & below",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "dna",
-                        stages: [
-                            { name: "NSEB", type: "Objective", month: "November" },
-                            { name: "INBO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for INBO",
-                        difficulty: "advanced"
-                    }
-                ],
-                "mathematics": [
-                    {
-                        name: "IMO (International Math Olympiad - SOF)",
-                        details: "Final year eligibility for SOF mathematics olympiad. Advanced mathematical concepts and problem-solving for college-bound students. Covers calculus, advanced algebra, and mathematical reasoning.",
-                        level: "School → International",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/imo",
-                        icon: "calculator",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "December" },
-                            { name: "Level 2", type: "Subjective", month: "February" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, scholarships",
-                        difficulty: "intermediate"
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
                     },
-                    {
-                        name: "PRMO (Pre-Regional Math Olympiad)",
-                        details: "Last opportunity for PRMO participation. Critical for students aiming for international mathematical olympiad representation. Requires mastery of advanced mathematical concepts and proof techniques.",
-                        level: "National → International (via RMO, INMO)",
-                        eligibility: "Class 8-12",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.mtai.org.in/prmo",
-                        icon: "square-root-alt",
-                        stages: [
-                            { name: "PRMO", type: "Subjective", month: "August" },
-                            { name: "RMO", type: "Subjective", month: "October" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for RMO, certificates",
-                        difficulty: "advanced"
+                    awards: {
+                        scholarships: {
+                            available: false,
+                            amount: "N/A",
+                            criteria: "N/A"
+                        }
                     },
-                    {
-                        name: "RMO (Regional Math Olympiad)",
-                        details: "Elite mathematics competition leading to INMO. Represents the highest level of school mathematics in India. Success opens doors to mathematical research and advanced study opportunities.",
-                        level: "Regional → National",
-                        eligibility: "Qualify via PRMO",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "chart-line",
-                        stages: [
-                            { name: "RMO", type: "Subjective", month: "October" },
-                            { name: "INMO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "Selection for INMO",
-                        difficulty: "advanced"
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/igko"
                     },
-                    {
-                        name: "INMO (Indian National Math Olympiad)",
-                        details: "Premier mathematics competition in India. Top performers are selected for International Mathematical Olympiad (IMO) training camp. Tests advanced problem-solving and proof-writing abilities.",
-                        level: "National → International",
-                        eligibility: "Qualify via RMO",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal",
-                        stages: [
-                            { name: "INMO", type: "Subjective", month: "January" },
-                            { name: "IMOTC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
-                    }
-                ],
-                "computer": [
-                    {
-                        name: "NCO (National Cyber Olympiad - SOF)",
-                        details: "Advanced computer science olympiad covering cutting-edge topics like machine learning, blockchain technology, advanced programming paradigms, and computational thinking for complex problem solving.",
-                        level: "School → National",
-                        eligibility: "Class 1-12",
-                        organizer: "SOF (Science Olympiad Foundation)",
-                        website: "https://sofworld.org/nco",
-                        icon: "laptop-code",
-                        stages: [
-                            { name: "Level 1", type: "Objective", month: "November" }
-                        ],
-                        fees: "₹125 per student",
-                        prizes: "Medals, certificates, tech gadgets",
-                        difficulty: "intermediate"
+                    difficulty: "Easy",
+                    popularity: 85,
+                    participationCount: 350000,
+                    icon: "fas fa-globe",
+                    color: "#6366f1",
+                    tags: ["General Knowledge", "Current Affairs", "Single Level", "Awareness"],
+                    description: "Covers current affairs, science & technology, Indian history, geography and world knowledge. Single-level examination.",
+                    mode: "Offline"
+                },
+                {
+                    id: "nco-2025",
+                    name: "National Cyber Olympiad",
+                    shortName: "NCO",
+                    subject: "Computer Science",
+                    subjectAreas: ["Programming", "Computer Fundamentals", "Internet Technology", "Cybersecurity"],
+                    classes: {
+                        eligible: "1-10",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"}
+                        ]
                     },
-                    {
-                        name: "ZCO (Zonal Computing Olympiad)",
-                        details: "Premier programming olympiad for senior students. Success leads to Indian National Olympiad in Informatics (INOI) and potential IOI representation. Requires expertise in algorithms and data structures.",
-                        level: "National → IOI",
-                        eligibility: "School students",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.iarcs.org.in/zco",
-                        icon: "code",
-                        stages: [
-                            { name: "ZCO", type: "Online Programming", month: "December" },
-                            { name: "INOI", type: "Advanced Programming", month: "February" }
-                        ],
-                        fees: "Free",
-                        prizes: "Selection for INOI",
-                        difficulty: "advanced"
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
                     },
-                    {
-                        name: "INOI (Indian National Olympiad in Informatics)",
-                        details: "Premier programming competition in India. Top performers are selected for International Olympiad in Informatics (IOI) training camp. Tests advanced algorithmic problem-solving skills.",
-                        level: "National → International",
-                        eligibility: "Qualify via ZCO",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://www.iarcs.org.in/inoi",
-                        icon: "medal",
-                        stages: [
-                            { name: "INOI", type: "Programming", month: "February" },
-                            { name: "IOITC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
-                    }
-                ],
-                "astronomy": [
-                    {
-                        name: "NSEA (National Standard Exam in Astronomy)",
-                        details: "Advanced astronomy competition covering astrophysics, cosmology, and observational techniques. Leads to International Astronomy Olympiad participation for top performers.",
-                        level: "National → International",
-                        eligibility: "Class 12 & below",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "star",
-                        stages: [
-                            { name: "NSEA", type: "Objective", month: "November" },
-                            { name: "INAO", type: "Subjective", month: "January" }
-                        ],
-                        fees: "₹200 per student",
-                        prizes: "Selection for international olympiad",
-                        difficulty: "advanced"
+                    schedule: {
+                        registrationStart: "2025-06-01",
+                        registrationEnd: "2025-09-15",
+                        examDates: [
+                            {date: "2025-09-24", level: 1, description: "Single Level - Set A"},
+                            {date: "2025-10-09", level: 1, description: "Single Level - Set B"},
+                            {date: "2026-01-22", level: 1, description: "Single Level - Set C"}
+                        ]
                     },
-                    {
-                        name: "INAO (Indian National Astronomy Olympiad)",
-                        details: "Advanced astronomy competition for students who qualify NSEA. Covers astrophysics, cosmology, and observational techniques. Top performers represent India at international olympiads.",
-                        level: "National → International",
-                        eligibility: "Qualify via NSEA",
-                        organizer: "HBCSE (Homi Bhabha Centre)",
-                        website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal",
-                        stages: [
-                            { name: "INAO", type: "Subjective", month: "January" },
-                            { name: "OCSC", type: "Training Camp", month: "April" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "International representation",
-                        difficulty: "advanced"
-                    }
-                ],
-                "biotechnology": [
-                    {
-                        name: "National Biotechnology Olympiad",
-                        details: "Advanced competition testing knowledge of genetic engineering, bioinformatics, and biotechnological applications. Includes case studies and research components.",
-                        level: "National",
-                        eligibility: "Class 11-12",
-                        organizer: "Biotech Research Society",
-                        website: "https://www.brs.org.in",
-                        icon: "dna",
-                        stages: [
-                            { name: "Theory Exam", type: "Objective", month: "October" },
-                            { name: "Research Project", type: "Submission", month: "December" }
-                        ],
-                        fees: "₹300 per student",
-                        prizes: "Certificates, lab internships",
-                        difficulty: "advanced"
-                    }
-                ],
-                "geography": [
-                    {
-                        name: "GeoGenius Geography Olympiad",
-                        details: "Advanced geography competition testing expertise in geospatial analysis, climate science, and human-environment interactions. Includes GIS applications and fieldwork components.",
-                        level: "National",
-                        eligibility: "Class 2-12",
-                        organizer: "GeoGenius Foundation",
-                        website: "https://geogeniusindia.org",
-                        icon: "map-marked-alt",
-                        stages: [
-                            { name: "School Level", type: "Objective", month: "September" },
-                            { name: "National Finals", type: "Fieldwork", month: "November" }
-                        ],
-                        fees: "₹100 per student",
-                        prizes: "Certificates, medals, educational trips",
-                        difficulty: "advanced"
-                    }
-                ]
-            },
-            "post-12": {
-                "undergraduate": [
-                    {
-                        name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
-                        details: "Continuing fellowship for undergraduate students in basic sciences. Provides research opportunities, financial support, and mentorship for students pursuing careers in scientific research.",
-                        level: "National Fellowship",
-                        eligibility: "UG students in Science",
-                        organizer: "IISc (Indian Institute of Science)",
-                        website: "https://kvpy.iisc.ac.in",
-                        icon: "graduation-cap",
-                        stages: [
-                            { name: "Aptitude Test", type: "Objective", month: "July" },
-                            { name: "Interview", type: "Personal", month: "September" }
-                        ],
-                        fees: "₹1000 (waived for SC/ST/PwD)",
-                        prizes: "Scholarship up to ₹7000/month",
-                        difficulty: "advanced"
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
                     },
-                    {
-                        name: "Inter-University Physics Olympiad",
-                        details: "National-level physics competition for undergraduate students. Tests advanced problem-solving skills in classical and modern physics, often used as a qualifier for international competitions.",
-                        level: "National",
-                        eligibility: "UG Physics students",
-                        organizer: "IAPT (Indian Association of Physics Teachers)",
-                        website: "https://iapt.org.in",
-                        icon: "atom",
-                        stages: [
-                            { name: "Theory Exam", type: "Subjective", month: "February" },
-                            { name: "Practical Round", type: "Lab Work", month: "March" }
-                        ],
-                        fees: "₹500 per student",
-                        prizes: "Certificates, research opportunities",
-                        difficulty: "advanced"
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹30,000",
+                            criteria: "Top 1% performers"
+                        }
                     },
-                    {
-                        name: "Inter-University Mathematics Olympiad",
-                        details: "Prestigious mathematics competition for undergraduate students. Covers advanced topics in pure and applied mathematics, serving as a platform for identifying mathematical talent.",
-                        level: "National",
-                        eligibility: "UG Mathematics students",
-                        organizer: "CMI (Chennai Mathematical Institute)",
-                        website: "https://www.cmi.ac.in",
-                        icon: "calculator",
-                        stages: [
-                            { name: "Single Stage", type: "Proof-Based", month: "March" }
-                        ],
-                        fees: "₹500 per student",
-                        prizes: "Certificates, research internships",
-                        difficulty: "advanced"
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/nco"
                     },
-                    {
-                        name: "ISI Entrance Exam",
-                        details: "Competitive entrance examination for admission to Indian Statistical Institute's prestigious Bachelor's and Master's programs in Statistics, Mathematics, and Computer Science.",
-                        level: "National",
-                        eligibility: "Class 12 & UG students",
-                        organizer: "Indian Statistical Institute",
-                        website: "https://www.isical.ac.in",
-                        icon: "chart-bar",
-                        stages: [
-                            { name: "Written Test", type: "Objective+Subjective", month: "May" },
-                            { name: "Interview", type: "Personal", month: "June" }
-                        ],
-                        fees: "₹1500 (₹750 for SC/ST/PwD)",
-                        prizes: "Admission to ISI programs",
-                        difficulty: "advanced"
-                    }
-                ],
-                "hackathons": [
-                    {
-                        name: "Smart India Hackathon (SIH)",
-                        details: "Largest national hackathon organized by the Government of India. Focuses on solving real-world problems through technology innovation with themes ranging from healthcare to smart cities.",
-                        level: "National",
-                        eligibility: "College students",
-                        organizer: "MHRD, Govt. of India",
-                        website: "https://sih.gov.in",
-                        icon: "laptop-medical",
-                        stages: [
-                            { name: "Idea Submission", type: "Online", month: "January" },
-                            { name: "Grand Finale", type: "Onsite Hackathon", month: "March" }
-                        ],
-                        fees: "Free",
-                        prizes: "Cash prizes up to ₹1,00,000",
-                        difficulty: "intermediate"
+                    difficulty: "Medium",
+                    popularity: 90,
+                    participationCount: 320000,
+                    icon: "fas fa-laptop-code",
+                    color: "#8b5cf6",
+                    tags: ["Computer Science", "Programming", "Single Level", "Technology"],
+                    description: "Introduces cyber concepts, IT skills, programming basics & logical reasoning. Single-round ranking system.",
+                    mode: "Offline"
+                },
+                {
+                    id: "isso-2025",
+                    name: "International Social Studies Olympiad",
+                    shortName: "ISSO",
+                    subject: "Social Studies",
+                    subjectAreas: ["History", "Geography", "Civics", "Economics"],
+                    classes: {
+                        eligible: "3-10",
+                        ranges: [
+                            {min: 3, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"}
+                        ]
                     },
-                    {
-                        name: "Google Hash Code",
-                        details: "International team-based programming competition where teams solve complex engineering problems. Tests algorithmic thinking and teamwork under time constraints.",
-                        level: "International",
-                        eligibility: "16+ years",
-                        organizer: "Google",
-                        website: "https://codingcompetitions.withgoogle.com/hashcode",
-                        icon: "google",
-                        stages: [
-                            { name: "Online Qualification", type: "Programming", month: "February" },
-                            { name: "Final Round", type: "Onsite", month: "April" }
-                        ],
-                        fees: "Free",
-                        prizes: "Cash prizes, Google internships",
-                        difficulty: "advanced"
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
                     },
-                    {
-                        name: "Microsoft Imagine Cup",
-                        details: "Global technology competition where students create innovative solutions using Microsoft technologies. Categories include AI, Mixed Reality, and Social Impact.",
-                        level: "International",
-                        eligibility: "16+ years",
-                        organizer: "Microsoft",
-                        website: "https://imaginecup.microsoft.com",
-                        icon: "microsoft",
-                        stages: [
-                            { name: "National Finals", type: "Project Submission", month: "March" },
-                            { name: "World Finals", type: "Presentation", month: "May" }
-                        ],
-                        fees: "Free",
-                        prizes: "$100,000 prize pool",
-                        difficulty: "advanced"
+                    schedule: {
+                        registrationStart: "2025-06-01",
+                        registrationEnd: "2025-09-10",
+                        examDates: [
+                            {date: "2025-09-18", level: 1, description: "Single Level - Set A"},
+                            {date: "2025-11-20", level: 1, description: "Single Level - Set B"},
+                            {date: "2026-01-23", level: 1, description: "Single Level - Set C"}
+                        ]
                     },
-                    {
-                        name: "HackMIT",
-                        details: "Premier collegiate hackathon at MIT with participants from top universities worldwide. Focuses on creative problem-solving through technology.",
-                        level: "International",
-                        eligibility: "College students",
-                        organizer: "MIT",
-                        website: "https://hackmit.org",
-                        icon: "university",
-                        stages: [
-                            { name: "Application", type: "Online", month: "July" },
-                            { name: "Hackathon", type: "Onsite", month: "September" }
-                        ],
-                        fees: "Free (travel grants available)",
-                        prizes: "Tech gadgets, internships",
-                        difficulty: "advanced"
-                    }
-                ],
-                "research": [
-                    {
-                        name: "IRIS National Fair",
-                        details: "National science research competition for undergraduate students to showcase innovative research projects. Provides platform for young researchers to connect with scientific community.",
-                        level: "National",
-                        eligibility: "UG science students",
-                        organizer: "Department of Science & Technology",
-                        website: "https://www.irisnationalfair.org",
-                        icon: "microscope",
-                        stages: [
-                            { name: "Project Submission", type: "Research Paper", month: "August" },
-                            { name: "National Fair", type: "Presentation", month: "December" }
-                        ],
-                        fees: "Free",
-                        prizes: "Research grants, publications",
-                        difficulty: "advanced"
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
                     },
-                    {
-                        name: "Intel International Science Fair",
-                        details: "Prestigious international science research competition for students. Indian qualifiers are selected through national-level science fairs and competitions.",
-                        level: "International",
-                        eligibility: "Class 9 to UG",
-                        organizer: "Society for Science",
-                        website: "https://www.societyforscience.org/isef",
-                        icon: "medal",
-                        stages: [
-                            { name: "National Fair", type: "Project Presentation", month: "January" },
-                            { name: "International Finals", type: "Global Competition", month: "May" }
-                        ],
-                        fees: "Free for qualifiers",
-                        prizes: "Scholarships up to $75,000",
-                        difficulty: "advanced"
+                    awards: {
+                        scholarships: {
+                            available: false,
+                            amount: "N/A",
+                            criteria: "N/A"
+                        }
                     },
-                    {
-                        name: "DST Inspire Awards",
-                        details: "Innovation in Science Pursuit for Inspired Research (INSPIRE) program recognizes and supports young researchers in science. Includes scholarships and research grants.",
-                        level: "National",
-                        eligibility: "UG & PG science students",
-                        organizer: "Department of Science & Technology",
-                        website: "https://www.inspire-dst.gov.in",
-                        icon: "award",
-                        stages: [
-                            { name: "Application", type: "Online", month: "June" },
-                            { name: "Award Ceremony", type: "National", month: "December" }
-                        ],
-                        fees: "Free",
-                        prizes: "Scholarships, research funding",
-                        difficulty: "advanced"
-                    }
-                ]
-            }
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/isso"
+                    },
+                    difficulty: "Medium",
+                    popularity: 78,
+                    participationCount: 280000,
+                    icon: "fas fa-landmark",
+                    color: "#ef4444",
+                    tags: ["Social Studies", "History", "Single Level", "Civic Awareness"],
+                    description: "Comprehensive coverage of history, geography, civics & economics with Higher Order Thinking Skills section.",
+                    mode: "Offline"
+                },
+                {
+                    id: "ico-2025",
+                    name: "International Commerce Olympiad",
+                    shortName: "ICO",
+                    subject: "Commerce",
+                    subjectAreas: ["Economics", "Business Studies", "Accountancy", "Entrepreneurship"],
+                    classes: {
+                        eligible: "11-12",
+                        ranges: [
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-06-01",
+                        registrationEnd: "2025-09-10",
+                        examDates: [
+                            {date: "2025-09-18", level: 1, description: "Single Level - Set A"},
+                            {date: "2025-11-07", level: 1, description: "Single Level - Set B"}
+                        ]
+                    },
+                    fees: {
+                        registration: 125,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹25,000",
+                            criteria: "Top 2% performers"
+                        }
+                    },
+                    organizer: {
+                        name: "Science Olympiad Foundation",
+                        website: "https://sofworld.org/ico"
+                    },
+                    difficulty: "Medium",
+                    popularity: 72,
+                    participationCount: 150000,
+                    icon: "fas fa-chart-line",
+                    color: "#059669",
+                    tags: ["Commerce", "Business Studies", "Single Level", "Economics"],
+                    description: "Covers economics, business studies & accountancy. Open to all streams in Classes 11-12 including non-commerce students.",
+                    mode: "Offline"
+                },
+                // Individual Science Olympiads (HBCSE)
+                {
+                    id: "inpho-2025",
+                    name: "Indian National Physics Olympiad",
+                    shortName: "INPhO",
+                    subject: "Physics",
+                    subjectAreas: ["Mechanics", "Thermodynamics", "Electromagnetism", "Modern Physics"],
+                    classes: {
+                        eligible: "11-12",
+                        ranges: [
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 3,
+                        level1: {
+                            duration: "120 minutes",
+                            questions: 30
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-08-01",
+                        registrationEnd: "2025-10-31",
+                        examDates: [
+                            {date: "2025-11-24", level: 1, description: "NSEP - National Standard Examination"},
+                            {date: "2026-01-26", level: 2, description: "INPhO - Indian National Physics Olympiad"},
+                            {date: "2026-05-15", level: 3, description: "International Physics Olympiad Training"}
+                        ]
+                    },
+                    fees: {
+                        registration: 200,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹1,00,000",
+                            criteria: "Selection to International Physics Olympiad"
+                        }
+                    },
+                    organizer: {
+                        name: "Homi Bhabha Centre for Science Education",
+                        website: "https://www.hbcse.tifr.res.in/olympiads/physics"
+                    },
+                    difficulty: "Hard",
+                    popularity: 88,
+                    participationCount: 45000,
+                    icon: "fas fa-atom",
+                    color: "#8b5cf6",
+                    tags: ["Physics", "HBCSE", "International Gateway", "Advanced"],
+                    description: "Gateway to International Physics Olympiad. Tests deep understanding of physics concepts through theoretical and experimental problems.",
+                    mode: "Offline"
+                },
+                {
+                    id: "incho-2025",
+                    name: "Indian National Chemistry Olympiad",
+                    shortName: "INChO",
+                    subject: "Chemistry",
+                    subjectAreas: ["Inorganic Chemistry", "Organic Chemistry", "Physical Chemistry", "Analytical Chemistry"],
+                    classes: {
+                        eligible: "11-12",
+                        ranges: [
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 3,
+                        level1: {
+                            duration: "120 minutes",
+                            questions: 30
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-08-01",
+                        registrationEnd: "2025-10-31",
+                        examDates: [
+                            {date: "2025-11-30", level: 1, description: "NSEC - National Standard Examination"},
+                            {date: "2026-01-25", level: 2, description: "INChO - Indian National Chemistry Olympiad"},
+                            {date: "2026-06-10", level: 3, description: "International Chemistry Olympiad Training"}
+                        ]
+                    },
+                    fees: {
+                        registration: 200,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹1,00,000",
+                            criteria: "Selection to International Chemistry Olympiad"
+                        }
+                    },
+                    organizer: {
+                        name: "Homi Bhabha Centre for Science Education",
+                        website: "https://www.hbcse.tifr.res.in/olympiads/chemistry"
+                    },
+                    difficulty: "Hard",
+                    popularity: 86,
+                    participationCount: 42000,
+                    icon: "fas fa-vial",
+                    color: "#06d6a0",
+                    tags: ["Chemistry", "HBCSE", "International Gateway", "Laboratory"],
+                    description: "Pathway to International Chemistry Olympiad. Focuses on theoretical knowledge and practical laboratory skills in chemistry.",
+                    mode: "Offline"
+                },
+                {
+                    id: "inbo-2025",
+                    name: "Indian National Biology Olympiad",
+                    shortName: "INBO",
+                    subject: "Biology",
+                    subjectAreas: ["Botany", "Zoology", "Genetics", "Ecology", "Molecular Biology"],
+                    classes: {
+                        eligible: "11-12",
+                        ranges: [
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 3,
+                        level1: {
+                            duration: "120 minutes",
+                            questions: 100
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-08-01",
+                        registrationEnd: "2025-10-31",
+                        examDates: [
+                            {date: "2025-12-01", level: 1, description: "NSEB - National Standard Examination"},
+                            {date: "2026-01-27", level: 2, description: "INBO - Indian National Biology Olympiad"},
+                            {date: "2026-06-15", level: 3, description: "International Biology Olympiad Training"}
+                        ]
+                    },
+                    fees: {
+                        registration: 200,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹1,00,000",
+                            criteria: "Selection to International Biology Olympiad"
+                        }
+                    },
+                    organizer: {
+                        name: "Homi Bhabha Centre for Science Education",
+                        website: "https://www.hbcse.tifr.res.in/olympiads/biology"
+                    },
+                    difficulty: "Hard",
+                    popularity: 84,
+                    participationCount: 38000,
+                    icon: "fas fa-dna",
+                    color: "#ef476f",
+                    tags: ["Biology", "HBCSE", "International Gateway", "Life Sciences"],
+                    description: "Gateway to International Biology Olympiad. Covers all aspects of life sciences from molecular to ecological levels.",
+                    mode: "Offline"
+                },
+                {
+                    id: "inao-2025",
+                    name: "Indian National Astronomy Olympiad",
+                    shortName: "INAO",
+                    subject: "Astronomy & Astrophysics",
+                    subjectAreas: ["Celestial Mechanics", "Stellar Astrophysics", "Planetary Science", "Cosmology"],
+                    classes: {
+                        eligible: "9-12",
+                        ranges: [
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 3,
+                        level1: {
+                            duration: "180 minutes",
+                            questions: 40
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-08-01",
+                        registrationEnd: "2025-10-31",
+                        examDates: [
+                            {date: "2025-11-26", level: 1, description: "NSEA - National Standard Examination"},
+                            {date: "2026-01-28", level: 2, description: "INAO - Indian National Astronomy Olympiad"},
+                            {date: "2026-07-20", level: 3, description: "International Astronomy Olympiad"}
+                        ]
+                    },
+                    fees: {
+                        registration: 200,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹75,000",
+                            criteria: "Top 10 students nationally"
+                        }
+                    },
+                    organizer: {
+                        name: "Homi Bhabha Centre for Science Education",
+                        website: "https://www.hbcse.tifr.res.in/olympiads/astronomy"
+                    },
+                    difficulty: "Hard",
+                    popularity: 76,
+                    participationCount: 25000,
+                    icon: "fas fa-satellite",
+                    color: "#4c1d95",
+                    tags: ["Astronomy", "HBCSE", "Space Science", "Astrophysics"],
+                    description: "Gateway to International Astronomy Olympiad. Tests knowledge of celestial mechanics, astrophysics, and observational astronomy.",
+                    mode: "Offline"
+                },
+                // Additional Subject Olympiads
+                {
+                    id: "nhso-2025",
+                    name: "National Hindi Science Olympiad",
+                    shortName: "NHSO",
+                    subject: "Hindi",
+                    subjectAreas: ["Grammar", "Literature", "Poetry", "Essay Writing"],
+                    classes: {
+                        eligible: "1-12",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "60 minutes",
+                            questions: 50
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-07-01",
+                        registrationEnd: "2025-09-30",
+                        examDates: [
+                            {date: "2025-10-15", level: 1, description: "Hindi Language Assessment"},
+                            {date: "2025-11-15", level: 1, description: "Alternative Date"}
+                        ]
+                    },
+                    fees: {
+                        registration: 100,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹20,000",
+                            criteria: "Top 5% performers"
+                        }
+                    },
+                    organizer: {
+                        name: "All India Hindi Olympiad Foundation",
+                        website: "https://www.hindiolympiad.org"
+                    },
+                    difficulty: "Medium",
+                    popularity: 68,
+                    participationCount: 180000,
+                    icon: "fas fa-language",
+                    color: "#dc2626",
+                    tags: ["Hindi", "Language", "Literature", "National Language"],
+                    description: "Promotes Hindi language proficiency through comprehensive assessment of grammar, literature, and creative writing skills.",
+                    mode: "Offline"
+                },
+                {
+                    id: "nrao-2025",
+                    name: "National Reasoning & Aptitude Olympiad",
+                    shortName: "NRAO",
+                    subject: "Reasoning & Aptitude",
+                    subjectAreas: ["Logical Reasoning", "Analytical Reasoning", "Verbal Reasoning", "Quantitative Aptitude"],
+                    classes: {
+                        eligible: "6-12",
+                        ranges: [
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "75 minutes",
+                            questions: 60
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-08-01",
+                        registrationEnd: "2025-10-15",
+                        examDates: [
+                            {date: "2025-11-10", level: 1, description: "Reasoning Assessment"},
+                            {date: "2025-12-08", level: 1, description: "Alternative Date"}
+                        ]
+                    },
+                    fees: {
+                        registration: 150,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹35,000",
+                            criteria: "Top 3% performers"
+                        }
+                    },
+                    organizer: {
+                        name: "Indian Reasoning Society",
+                        website: "https://www.reasoningolympiad.in"
+                    },
+                    difficulty: "Medium",
+                    popularity: 82,
+                    participationCount: 220000,
+                    icon: "fas fa-brain",
+                    color: "#7c3aed",
+                    tags: ["Reasoning", "Aptitude", "Logic", "Problem Solving"],
+                    description: "Develops logical thinking and analytical reasoning skills essential for competitive examinations and problem-solving.",
+                    mode: "Offline"
+                },
+                {
+                    id: "nado-2025",
+                    name: "National Art & Drawing Olympiad",
+                    shortName: "NADO",
+                    subject: "Drawing & Art",
+                    subjectAreas: ["Sketching", "Painting", "Digital Art", "Art History"],
+                    classes: {
+                        eligible: "1-12",
+                        ranges: [
+                            {min: 1, max: 5, category: "Primary"},
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 1,
+                        level1: {
+                            duration: "120 minutes",
+                            questions: "Practical Drawing"
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-07-15",
+                        registrationEnd: "2025-09-30",
+                        examDates: [
+                            {date: "2025-10-20", level: 1, description: "Art Competition"},
+                            {date: "2025-11-17", level: 1, description: "Alternative Date"}
+                        ]
+                    },
+                    fees: {
+                        registration: 200,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹50,000",
+                            criteria: "Outstanding artistic talent"
+                        }
+                    },
+                    organizer: {
+                        name: "National Art Education Foundation",
+                        website: "https://www.artolympiad.org.in"
+                    },
+                    difficulty: "Easy",
+                    popularity: 64,
+                    participationCount: 95000,
+                    icon: "fas fa-palette",
+                    color: "#f59e0b",
+                    tags: ["Art", "Drawing", "Creativity", "Visual Arts"],
+                    description: "Encourages artistic expression and creativity through various art forms including traditional and digital mediums.",
+                    mode: "Offline"
+                },
+                // Emerging Technology Olympiads
+                {
+                    id: "aimo-2025",
+                    name: "AI & Machine Learning Olympiad",
+                    shortName: "AIMO",
+                    subject: "AI & Machine Learning",
+                    subjectAreas: ["Machine Learning", "Deep Learning", "Neural Networks", "Data Science"],
+                    classes: {
+                        eligible: "9-12",
+                        ranges: [
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 2,
+                        level1: {
+                            duration: "90 minutes",
+                            questions: 40
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-09-01",
+                        registrationEnd: "2025-11-15",
+                        examDates: [
+                            {date: "2025-12-05", level: 1, description: "AI Theory and Applications"},
+                            {date: "2026-02-10", level: 2, description: "Advanced ML Projects"}
+                        ]
+                    },
+                    fees: {
+                        registration: 300,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹1,50,000",
+                            criteria: "Innovation in AI projects"
+                        }
+                    },
+                    organizer: {
+                        name: "Future Tech Foundation",
+                        website: "https://www.aiolympiad.tech"
+                    },
+                    difficulty: "Hard",
+                    popularity: 89,
+                    participationCount: 35000,
+                    icon: "fas fa-robot",
+                    color: "#1f2937",
+                    tags: ["AI", "Machine Learning", "Future Tech", "Innovation"],
+                    description: "Cutting-edge competition focusing on artificial intelligence, machine learning algorithms, and practical AI applications.",
+                    mode: "Online"
+                },
+                {
+                    id: "nro-2025",
+                    name: "National Robotics Olympiad",
+                    shortName: "NRO",
+                    subject: "Robotics",
+                    subjectAreas: ["Robot Design", "Programming", "Automation", "Mechatronics"],
+                    classes: {
+                        eligible: "6-12",
+                        ranges: [
+                            {min: 6, max: 8, category: "Middle"},
+                            {min: 9, max: 10, category: "Secondary"},
+                            {min: 11, max: 12, category: "Senior Secondary"}
+                        ]
+                    },
+                    examStructure: {
+                        levels: 2,
+                        level1: {
+                            duration: "120 minutes",
+                            questions: "Practical Robot Building"
+                        }
+                    },
+                    schedule: {
+                        registrationStart: "2025-08-15",
+                        registrationEnd: "2025-10-30",
+                        examDates: [
+                            {date: "2025-11-25", level: 1, description: "Robot Design Challenge"},
+                            {date: "2026-01-20", level: 2, description: "Advanced Robotics Competition"}
+                        ]
+                    },
+                    fees: {
+                        registration: 500,
+                        currency: "INR"
+                    },
+                    awards: {
+                        scholarships: {
+                            available: true,
+                            amount: "Up to ₹2,00,000",
+                            criteria: "Best robot design and functionality"
+                        }
+                    },
+                    organizer: {
+                        name: "Indian Robotics Society",
+                        website: "https://www.roboticsolympiad.in"
+                    },
+                    difficulty: "Hard",
+                    popularity: 78,
+                    participationCount: 28000,
+                    icon: "fas fa-cogs",
+                    color: "#374151",
+                    tags: ["Robotics", "Engineering", "Innovation", "STEM"],
+                    description: "Hands-on robotics competition involving design, programming, and operation of autonomous robots for various challenges.",
+                    mode: "Offline"
+                }
+            ]
         };
 
-        function findOlympiads() {
-            const classLevel = document.getElementById('class-select').value;
-            const subject = document.getElementById('subject-select').value;
-            const resultsDiv = document.getElementById('results');
-            
-            if (!classLevel) {
-                alert('Please select your class level first');
-                return;
+        // Application State Management
+        class OlympiadApp {
+            constructor() {
+                this.data = olympiadDatabase;
+                this.currentResults = [];
+                this.filters = {};
+                this.init();
             }
-            
-            resultsDiv.innerHTML = '';
-            
-            if (classLevel === 'post-12') {
-                renderPost12Results();
-                return;
+
+            init() {
+                this.bindEvents();
+                this.renderFeaturedOlympiads();
             }
-            
-            if (subject === 'all') {
-                renderAllSubjects(classLevel);
-            } else {
-                renderSubjectResults(classLevel, subject);
+
+            // Event Binding
+            bindEvents() {
+                const searchForm = document.getElementById('search-form');
+                searchForm.addEventListener('submit', (e) => this.handleSearch(e));
             }
-        }
-        
-        function renderAllSubjects(classLevel) {
-            const resultsDiv = document.getElementById('results');
-            let hasResults = false;
-            
-            resultsDiv.innerHTML = `
-                <div class="results-header">
-                    <h2 class="results-title">All Olympiads for Class ${classLevel}</h2>
-                    <p class="results-subtitle">Showing all available competitions across subjects</p>
-                </div>
-            `;
-            
-            for (const subject in olympiadData[classLevel]) {
-                const olympiads = olympiadData[classLevel][subject];
-                if (olympiads.length > 0) {
-                    hasResults = true;
-                    const subjectName = getSubjectName(subject);
-                    
-                    const categorySection = document.createElement('div');
-                    categorySection.className = 'category-section';
-                    categorySection.innerHTML = `
-                        <div class="category-header">
-                            <i class="fas fa-${olympiads[0].icon}"></i> ${subjectName}
+
+            // Search Functionality
+            handleSearch(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                this.filters = {
+                    classLevel: formData.get('classLevel'),
+                    subject: formData.get('subject')
+                };
+
+                this.performSearch();
+            }
+
+            performSearch() {
+                this.showLoading();
+                
+                // Simulate API delay for better UX
+                setTimeout(() => {
+                    this.currentResults = this.filterOlympiads(this.filters);
+                    this.renderResults();
+                }, 500);
+            }
+
+            filterOlympiads(filters) {
+                return this.data.olympiads.filter(olympiad => {
+                    // Class level filter
+                    if (filters.classLevel) {
+                        const isEligible = this.checkClassEligibility(olympiad, filters.classLevel);
+                        if (!isEligible) return false;
+                    }
+
+                    // Subject filter
+                    if (filters.subject && olympiad.subject !== filters.subject) {
+                        return false;
+                    }
+
+                    return true;
+                });
+            }
+
+            checkClassEligibility(olympiad, classLevel) {
+                if (classLevel === 'post-12') {
+                    return olympiad.classes.ranges.some(range => range.max >= 12);
+                }
+
+                const [minClass, maxClass] = classLevel.split('-').map(Number);
+                return olympiad.classes.ranges.some(range => 
+                    minClass <= range.max && maxClass >= range.min
+                );
+            }
+
+            // Rendering Functions
+            renderFeaturedOlympiads() {
+                const featured = this.data.olympiads
+                    .sort((a, b) => b.popularity - a.popularity)
+                    .slice(0, 6);
+
+                this.renderOlympiadGrid(featured, 'Featured Olympiads', document.getElementById('results-content'));
+            }
+
+            renderResults() {
+                const resultsContent = document.getElementById('results-content');
+                
+                if (this.currentResults.length === 0) {
+                    this.renderEmptyState(resultsContent);
+                    return;
+                }
+
+                const searchCriteria = this.buildSearchCriteriaString();
+                this.renderOlympiadGrid(this.currentResults, `Search Results (${this.currentResults.length})`, resultsContent, searchCriteria);
+            }
+
+            renderOlympiadGrid(olympiads, title, container, subtitle = '') {
+                const header = `
+                    <div class="results-header">
+                        <div>
+                            <h2 id="results-heading" class="results-title">${title}</h2>
+                            ${subtitle ? `<p class="results-count">${subtitle}</p>` : ''}
                         </div>
-                        <div class="olympiad-grid" id="${subject}-grid"></div>
-                    `;
-                    
-                    resultsDiv.appendChild(categorySection);
-                    
-                    const gridDiv = document.getElementById(`${subject}-grid`);
-                    olympiads.forEach(olympiad => {
-                        gridDiv.appendChild(createOlympiadCard(olympiad));
-                    });
+                        <div class="results-meta">
+                            <span class="results-count">${olympiads.length} olympiad${olympiads.length !== 1 ? 's' : ''}</span>
+                            <select class="sort-dropdown" onchange="app.sortResults(this.value)">
+                                <option value="popularity">Sort by Popularity</option>
+                                <option value="name">Sort by Name</option>
+                                <option value="difficulty">Sort by Difficulty</option>
+                                <option value="fee">Sort by Fee</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+
+                const grid = `
+                    <div class="olympiad-grid">
+                        ${olympiads.map(olympiad => this.renderOlympiadCard(olympiad)).join('')}
+                    </div>
+                `;
+
+                container.innerHTML = header + grid;
+                this.announceToScreenReader(`Found ${olympiads.length} olympiad competitions`);
+            }
+
+            renderOlympiadCard(olympiad) {
+                const registrationStatus = this.getRegistrationStatus(olympiad);
+                const nextExam = this.getNextExamDate(olympiad);
+                
+                return `
+                    <article class="olympiad-card" style="--card-accent: ${olympiad.color}" data-olympiad-id="${olympiad.id}">
+                        <div class="card-status ${registrationStatus.class}">${registrationStatus.text}</div>
+                        
+                        <div class="card-header">
+                            <i class="${olympiad.icon} card-icon" aria-hidden="true"></i>
+                            <div class="card-title-group">
+                                <h3 class="card-title">${olympiad.name}</h3>
+                                <p class="card-subtitle">${olympiad.shortName} • ${olympiad.subject}</p>
+                                <span class="difficulty-badge difficulty-${olympiad.difficulty.toLowerCase()}">${olympiad.difficulty}</span>
+                            </div>
+                        </div>
+
+                        <p class="card-description">${olympiad.description}</p>
+
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon" aria-hidden="true"></i>
+                                <span>Classes ${olympiad.classes.eligible}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar meta-icon" aria-hidden="true"></i>
+                                <span>${nextExam ? this.formatDate(nextExam.date) : 'TBA'}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon" aria-hidden="true"></i>
+                                <span>${olympiad.examStructure.level1.duration}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-rupee-sign meta-icon" aria-hidden="true"></i>
+                                <span>₹${olympiad.fees.registration}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-layer-group meta-icon" aria-hidden="true"></i>
+                                <span>${olympiad.examStructure.levels} Level${olympiad.examStructure.levels > 1 ? 's' : ''}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-desktop meta-icon" aria-hidden="true"></i>
+                                <span>${olympiad.mode}</span>
+                            </div>
+                        </div>
+
+                        <div class="card-highlights">
+                            <h4 class="highlights-title">Key Features</h4>
+                            <div class="highlights-list">
+                                ${olympiad.tags.map(tag => `<span class="highlight-tag">${tag}</span>`).join('')}
+                                ${olympiad.awards.scholarships.available ? '<span class="highlight-tag">Scholarships Available</span>' : ''}
+                            </div>
+                        </div>
+
+                        <div class="card-actions">
+                            <a href="${olympiad.organizer.website}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                Register Now
+                            </a>
+                            <button class="btn btn-outline" onclick="app.showOlympiadDetails('${olympiad.id}')">
+                                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                                Details
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }
+
+            // Utility Functions
+            getRegistrationStatus(olympiad) {
+                const now = new Date();
+                const regStart = new Date(olympiad.schedule.registrationStart);
+                const regEnd = new Date(olympiad.schedule.registrationEnd);
+
+                if (now < regStart) {
+                    return { class: 'upcoming', text: 'Upcoming' };
+                } else if (now <= regEnd) {
+                    return { class: 'open', text: 'Open' };
+                } else {
+                    return { class: 'closed', text: 'Closed' };
                 }
             }
-            
-            if (!hasResults) {
-                resultsDiv.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <h3>No Olympiads Found</h3>
-                        <p>We couldn't find any olympiads matching your criteria. Try selecting a different class or subject.</p>
+
+            getNextExamDate(olympiad) {
+                const now = new Date();
+                return olympiad.schedule.examDates.find(exam => new Date(exam.date) > now);
+            }
+
+            formatDate(dateString) {
+                return new Date(dateString).toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+            }
+
+            buildSearchCriteriaString() {
+                const criteria = [];
+                if (this.filters.subject) criteria.push(this.filters.subject);
+                if (this.filters.classLevel) criteria.push(`Classes ${this.filters.classLevel}`);
+                return criteria.join(' • ');
+            }
+
+            // Detail Functions
+            showOlympiadDetails(olympiadId) {
+                const olympiad = this.data.olympiads.find(o => o.id === olympiadId);
+                if (!olympiad) return;
+
+                alert(`${olympiad.name}\n\nSubject: ${olympiad.subject}\nFee: ₹${olympiad.fees.registration}\nDifficulty: ${olympiad.difficulty}\n\nDescription: ${olympiad.description}\n\nOrganizer: ${olympiad.organizer.name}\nWebsite: ${olympiad.organizer.website}`);
+            }
+
+            // UI Helper Functions
+            showLoading() {
+                const resultsContent = document.getElementById('results-content');
+                resultsContent.innerHTML = `
+                    <div class="loading">
+                        <div class="spinner" role="status" aria-label="Loading olympiad results"></div>
                     </div>
                 `;
             }
-        }
-        
-        function renderSubjectResults(classLevel, subject) {
-            const resultsDiv = document.getElementById('results');
-            const olympiads = olympiadData[classLevel][subject] || [];
-            
-            if (olympiads.length === 0) {
-                resultsDiv.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <h3>No Olympiads Found</h3>
-                        <p>We couldn't find any ${getSubjectName(subject)} olympiads for Class ${classLevel}. Try selecting a different subject or class level.</p>
+
+            renderEmptyState(container) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search empty-icon" aria-hidden="true"></i>
+                        <h3 class="empty-title">No Olympiads Found</h3>
+                        <p class="empty-description">We couldn't find any olympiads matching your search criteria. Try adjusting your filters or browse our featured competitions.</p>
+                        <button class="btn btn-primary" onclick="app.resetFilters()">
+                            <i class="fas fa-refresh" aria-hidden="true"></i>
+                            Reset Filters
+                        </button>
                     </div>
                 `;
-                return;
             }
-            
-            const subjectName = getSubjectName(subject);
-            resultsDiv.innerHTML = `
-                <div class="results-header">
-                    <h2 class="results-title">${subjectName} Olympiads for Class ${classLevel}</h2>
-                    <p class="results-subtitle">Showing ${olympiads.length} competition${olympiads.length > 1 ? 's' : ''} in ${subjectName}</p>
-                </div>
-                <div class="category-section">
-                    <div class="category-header">
-                        <i class="fas fa-${olympiads[0].icon}"></i> ${subjectName} Competitions
-                    </div>
-                    <div class="olympiad-grid" id="subject-grid"></div>
-                </div>
-            `;
-            
-            const gridDiv = document.getElementById('subject-grid');
-            olympiads.forEach(olympiad => {
-                gridDiv.appendChild(createOlympiadCard(olympiad));
-            });
-        }
-        
-        function createOlympiadCard(olympiad) {
-            const card = document.createElement('div');
-            card.className = 'olympiad-card';
-            
-            // Difficulty badge
-            let difficultyBadge = '';
-            if (olympiad.difficulty) {
-                difficultyBadge = `<span class="difficulty-badge ${olympiad.difficulty}">
-                    ${olympiad.difficulty.charAt(0).toUpperCase() + olympiad.difficulty.slice(1)}
-                </span>`;
-            }
-            
-            // Stages timeline
-            let stagesHTML = '';
-            if (olympiad.stages && olympiad.stages.length > 0) {
-                stagesHTML = `<div class="stage-timeline">
-                    <h4>Competition Stages:</h4>
-                    ${olympiad.stages.map(stage => `
-                        <div class="stage-item">
-                            <div class="stage-name">
-                                <i class="fas fa-${getStageIcon(stage.type)}"></i>
-                                ${stage.name}
-                            </div>
-                            <div>Type: ${stage.type}</div>
-                            <div>Month: ${stage.month}</div>
-                        </div>
-                    `).join('')}
-                </div>`;
-            }
-            
-            // Important dates
-            let datesHTML = '';
-            if (olympiad.important_dates && olympiad.important_dates.length > 0) {
-                datesHTML = `<div class="prize-details">
-                    <h4>Important Dates:</h4>
-                    <div class="badge-grid">
-                        ${olympiad.important_dates.map(date => `
-                            <div class="date-badge">
-                                <i class="fas fa-calendar-day"></i>
-                                <strong>${date.event}:</strong> ${date.date}
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>`;
-            }
-            
-            // Prizes and fees
-            let prizesHTML = '';
-            if (olympiad.prizes || olympiad.fees) {
-                prizesHTML = `<div class="prize-details">
-                    ${olympiad.fees ? `<p><strong>Fees:</strong> ${olympiad.fees}</p>` : ''}
-                    ${olympiad.prizes ? `<p><strong>Prizes:</strong> ${olympiad.prizes}</p>` : ''}
-                </div>`;
-            }
-            
-            // Preparation resources
-            let prepHTML = '';
-            if (olympiad.preparation) {
-                prepHTML = `<div class="preparation-resources">
-                    <h4>Preparation Resources:</h4>
-                    ${olympiad.preparation.books ? `<p><strong>Recommended Books:</strong> ${olympiad.preparation.books.join(', ')}</p>` : ''}
-                    ${olympiad.preparation.papers ? `<p><strong>Previous Papers:</strong> <a href="${olympiad.preparation.papers}" target="_blank">Download here</a></p>` : ''}
-                    ${olympiad.preparation.online ? `<p><strong>Online Resources:</strong> ${olympiad.preparation.online.join(', ')}</p>` : ''}
-                </div>`;
-            }
-            
-            card.innerHTML = `
-                <h3 class="olympiad-name">
-                    <i class="fas fa-${olympiad.icon}"></i> 
-                    ${olympiad.name}
-                    ${difficultyBadge}
-                </h3>
-                <p class="olympiad-details">${olympiad.details}</p>
+
+            // Accessibility Functions
+            announceToScreenReader(message) {
+                const announcement = document.createElement('div');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.setAttribute('class', 'sr-only');
+                announcement.textContent = message;
                 
-                ${stagesHTML}
-                ${datesHTML}
-                ${prizesHTML}
-                ${prepHTML}
+                document.body.appendChild(announcement);
                 
-                <div class="olympiad-meta">
-                    <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: ${olympiad.level}</div>
-                    <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: ${olympiad.eligibility}</div>
-                    <div class="meta-badge"><i class="fas fa-building"></i> Organizer: ${olympiad.organizer}</div>
-                    <a href="${olympiad.website}" target="_blank" class="website-link">
-                        <i class="fas fa-external-link-alt"></i> Visit Website
-                    </a>
-                </div>
-            `;
-            return card;
+                setTimeout(() => {
+                    document.body.removeChild(announcement);
+                }, 1000);
+            }
+
+            // Sorting Functions
+            sortResults(sortBy) {
+                if (!this.currentResults.length) return;
+
+                switch (sortBy) {
+                    case 'name':
+                        this.currentResults.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    case 'difficulty':
+                        const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+                        this.currentResults.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
+                        break;
+                    case 'fee':
+                        this.currentResults.sort((a, b) => a.fees.registration - b.fees.registration);
+                        break;
+                    default: // popularity
+                        this.currentResults.sort((a, b) => b.popularity - a.popularity);
+                }
+
+                this.renderResults();
+            }
+
+            // Reset Functions
+            resetFilters() {
+                document.getElementById('search-form').reset();
+                this.filters = {};
+                this.renderFeaturedOlympiads();
+            }
         }
-        
-        function getStageIcon(stageType) {
-            const icons = {
-                "Objective": "check-circle",
-                "Subjective": "pen-fancy",
-                "Online": "laptop",
-                "Project Submission": "file-upload",
-                "Programming": "code",
-                "Training": "chalkboard-teacher",
-                "Interview": "user-tie",
-                "Lab Work": "flask",
-                "Presentation": "presentation",
-                "Fieldwork": "map-marked-alt"
-            };
-            return icons[stageType] || "calendar-alt";
-        }
-        
-        function getSubjectName(subjectKey) {
-            const subjectNames = {
-                "science": "Science",
-                "mathematics": "Mathematics",
-                "computer": "Computer Science",
-                "english": "English",
-                "general": "General Knowledge",
-                "astronomy": "Astronomy",
-                "geography": "Geography",
-                "biotechnology": "Biotechnology",
-                "undergraduate": "Undergraduate Programs",
-                "hackathons": "Hackathons & Tech",
-                "research": "Research Competitions"
-            };
-            return subjectNames[subjectKey] || subjectKey;
-        }
-        
-        function renderPost12Results() {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = `
-                <div class="results-header">
-                    <h2 class="results-title">Post-Class 12 Opportunities</h2>
-                    <p class="results-subtitle">Competitions and programs for college students and beyond</p>
-                </div>
-                
-                <div class="post-12-section">
-                    <h3 class="post-12-title">Beyond School: Academic & Tech Competitions</h3>
-                    
-                    <div class="category-section">
-                        <div class="category-header">
-                            <i class="fas fa-graduation-cap"></i> Undergraduate Programs
-                        </div>
-                        <div class="olympiad-grid" id="undergraduate-grid"></div>
-                    </div>
-                    
-                    <div class="category-section">
-                        <div class="category-header">
-                            <i class="fas fa-laptop-code"></i> Hackathons & Tech Competitions
-                        </div>
-                        <div class="olympiad-grid" id="hackathons-grid"></div>
-                    </div>
-                    
-                    <div class="category-section">
-                        <div class="category-header">
-                            <i class="fas fa-microscope"></i> Research Competitions
-                        </div>
-                        <div class="olympiad-grid" id="research-grid"></div>
-                    </div>
-                    
-                    <div class="registration-info">
-                        <h3>Registration Tips for Post-Class 12</h3>
-                        <p>Most competitions for college students require direct registration through their official websites. Create accounts well before deadlines, prepare portfolios showcasing your projects and achievements, and join relevant student communities to stay updated. Many hackathons have rolling registration periods - apply early to secure your spot!</p>
-                    </div>
-                </div>
-            `;
-            
-            // Render undergraduate programs
-            const undergradGrid = document.getElementById('undergraduate-grid');
-            olympiadData['post-12']['undergraduate'].forEach(olympiad => {
-                undergradGrid.appendChild(createOlympiadCard(olympiad));
-            });
-            
-            // Render hackathons
-            const hackathonsGrid = document.getElementById('hackathons-grid');
-            olympiadData['post-12']['hackathons'].forEach(olympiad => {
-                hackathonsGrid.appendChild(createOlympiadCard(olympiad));
-            });
-            
-            // Render research competitions
-            const researchGrid = document.getElementById('research-grid');
-            olympiadData['post-12']['research'].forEach(olympiad => {
-                researchGrid.appendChild(createOlympiadCard(olympiad));
-            });
-        }
+
+        // Initialize the application
+        let app;
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new OlympiadApp();
+        });
+
+        // Error handling
+        window.addEventListener('error', (event) => {
+            console.error('Application error:', event.error);
+        });
     </script>
 </body>
 </html>
+
