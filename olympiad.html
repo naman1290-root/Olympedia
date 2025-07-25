@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Olympedia - Academic Olympiad Finder for India</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #f97316;
+            --accent: #3b82f6;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text: #334155;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            touch-action: manipulation;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 10px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(30, 41, 59, 0.15);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            padding: 35px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 20%);
+            opacity: 0.8;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            background: linear-gradient(to right, #ffffff, #ffd6a8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            color: #e2e8f0;
+        }
+
+        .main-content {
+            padding: 30px 20px;
+            flex: 1;
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .info-banner::before {
+            content: '💡';
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .info-banner h3 {
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-left: 50px;
+        }
+
+        .info-banner p {
+            color: var(--text);
+            line-height: 1.7;
+            margin-left: 50px;
+            font-size: 1.05rem;
+        }
+
+        .selection-panel {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(30, 41, 59, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .selection-panel:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.12);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .panel-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.01em;
+        }
+
+        .panel-header i {
+            color: var(--primary);
+            font-size: 1.8rem;
+            background: #e0f2fe;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--dark);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 14px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: inherit;
+            appearance: none;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%234b5563" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 16px;
+            padding-right: 50px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .find-btn {
+            background: linear-gradient(135deg, var(--secondary) 0%, #ea580c 100%);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .find-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.7s;
+        }
+
+        .find-btn:hover::before {
+            left: 100%;
+        }
+
+        .find-btn:hover, .find-btn:active {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.45);
+        }
+
+        .results {
+            margin-top: 35px;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .results-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .results-subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-section {
+            margin-bottom: 35px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%);
+            color: white;
+            padding: 18px 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15));
+        }
+
+        .olympiad-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            background: #f8fafc;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+        }
+
+        .olympiad-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .olympiad-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+        }
+
+        .olympiad-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(30, 64, 175, 0.15);
+            border-color: #93c5fd;
+        }
+
+        .olympiad-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .olympiad-name i {
+            color: var(--primary);
+            font-size: 1.3rem;
+            background: #e0f2fe;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .olympiad-details {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            flex-grow: 1;
+        }
+
+        .olympiad-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .meta-badge {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .website-link {
+            background: linear-gradient(135deg, var(--secondary) 0%, #ea580c 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 3px 8px rgba(249, 115, 22, 0.25);
+        }
+
+        .website-link:hover, .website-link:active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.35);
+        }
+
+        .no-results {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.3rem;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 20px;
+            border: 2px dashed #cbd5e1;
+            margin: 20px 0;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .post-12-section {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid #fcd34d;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-12-section::before {
+            content: '🚀';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.15;
+        }
+
+        .post-12-title {
+            color: #b45309;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .post-12-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .registration-info {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid var(--success);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 35px;
+            position: relative;
+        }
+
+        .registration-info::before {
+            content: '📅';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8rem;
+            color: #047857;
+        }
+
+        .registration-info h3 {
+            color: #065f46;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-left: 60px;
+        }
+
+        .registration-info p {
+            color: #047857;
+            line-height: 1.7;
+            margin-left: 60px;
+            font-size: 1.05rem;
+        }
+
+        .footer {
+            background: var(--dark);
+            color: #cbd5e1;
+            padding: 30px 25px;
+            text-align: center;
+            border-top: 1px solid #334155;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .help-message {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: #f8fafc;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+        /* Tablet and Desktop Styles */
+        @media (min-width: 768px) {
+            .container {
+                margin: 15px auto;
+            }
+            
+            .header {
+                padding: 45px 30px;
+            }
+            
+            h1 {
+                font-size: 3.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .main-content {
+                padding: 35px 30px;
+            }
+            
+            .filter-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px;
+            }
+            
+            .olympiad-grid {
+                grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            }
+            
+            .olympiad-card {
+                padding: 28px;
+            }
+            
+            .olympiad-name {
+                font-size: 1.6rem;
+            }
+            
+            .help-message {
+                font-size: 2rem;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1024px) {
+            .container {
+                margin: 20px auto;
+            }
+            
+            .header {
+                padding: 60px 40px;
+            }
+            
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Orientation adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .header {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 8px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            
+            .info-banner {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-trophy" style="font-size: 2.5rem;"></i>
+                    <h1>OLYMPEDIA</h1>
+                </div>
+                <p class="subtitle">Discover the perfect academic competitions for your educational journey in India</p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="info-banner">
+                <h3>About Academic Olympiads</h3>
+                <p>Olympiads are prestigious competitive examinations that challenge students in Mathematics, Science, Computer Science, and other subjects. They provide pathways from school level to international competitions, fostering critical thinking and problem-solving skills essential for academic excellence.</p>
+            </div>
+            
+            <div class="selection-panel">
+                <div class="panel-header">
+                    <i class="fas fa-search"></i>
+                    <h2>Find Your Olympiad</h2>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="class-select"><i class="fas fa-graduation-cap"></i> Select Your Class Level:</label>
+                        <select id="class-select">
+                            <option value="">Choose your academic level...</option>
+                            <option value="1-5">Classes 1-5 (Primary)</option>
+                            <option value="6-8">Classes 6-8 (Middle School)</option>
+                            <option value="9-10">Classes 9-10 (Secondary)</option>
+                            <option value="11-12">Classes 11-12 (Senior Secondary)</option>
+                            <option value="post-12">Post Class 12 (College & Beyond)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject-select"><i class="fas fa-book"></i> Select Subject Area:</label>
+                        <select id="subject-select">
+                            <option value="">Choose subject area...</option>
+                            <option value="all">All Subjects</option>
+                            <option value="science">Science</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="computer">Computer Science</option>
+                            <option value="english">English</option>
+                            <option value="general">General Knowledge</option>
+                            <option value="astronomy">Astronomy</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="find-btn" onclick="findOlympiads()">
+                    <i class="fas fa-search"></i> Find My Olympiads
+                </button>
+            </div>
+            
+            <div id="results" class="results">
+                <div class="results-header">
+                    <h2 class="results-title">Welcome to Olympedia</h2>
+                    <p class="results-subtitle">Select your class level and subject to discover relevant academic competitions</p>
+                </div>
+                
+                <div class="category-section">
+                    <div class="category-header">
+                        <i class="fas fa-lightbulb"></i> Featured Olympiads
+                    </div>
+                    <div class="olympiad-grid">
+                        <div class="olympiad-card">
+                            <h3 class="olympiad-name"><i class="fas fa-atom"></i> National Science Olympiad</h3>
+                            <p class="olympiad-details">Prestigious science competition covering Physics, Chemistry, Biology and Environmental Science. Pathway to international science olympiads.</p>
+                            <div class="olympiad-meta">
+                                <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: School → International</div>
+                                <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: Class 1-12</div>
+                                <a href="https://sofworld.org/nso" target="_blank" class="website-link">
+                                    <i class="fas fa-external-link-alt"></i> Visit Website
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="olympiad-card">
+                            <h3 class="olympiad-name"><i class="fas fa-square-root-alt"></i> International Math Olympiad</h3>
+                            <p class="olympiad-details">Premier mathematics competition that challenges students with complex problem-solving and logical reasoning questions.</p>
+                            <div class="olympiad-meta">
+                                <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: School → International</div>
+                                <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: Class 1-12</div>
+                                <a href="https://sofworld.org/imo" target="_blank" class="website-link">
+                                    <i class="fas fa-external-link-alt"></i> Visit Website
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="olympiad-card">
+                            <h3 class="olympiad-name"><i class="fas fa-laptop-code"></i> National Cyber Olympiad</h3>
+                            <p class="olympiad-details">Computer science olympiad focusing on programming concepts, cybersecurity, and emerging technologies.</p>
+                            <div class="olympiad-meta">
+                                <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: School → National</div>
+                                <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: Class 1-12</div>
+                                <a href="https://sofworld.org/nco" target="_blank" class="website-link">
+                                    <i class="fas fa-external-link-alt"></i> Visit Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-content">
+                <div class="help-message">
+                    <i class="fas fa-heart"></i> HOPE THIS HELPS :D
+                </div>
+                <p class="copyright">© 2025 Olympedia. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const olympiadData = {
+            "1-5": {
+                "science": [
+                    {
+                        name: "NSO (National Science Olympiad)",
+                        details: "Foundation-level science olympiad covering basic concepts in Physics, Chemistry, Biology, and Environmental Science. Designed to build scientific temperament from an early age with age-appropriate questions and activities.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nso",
+                        icon: "flask"
+                    }
+                ],
+                "mathematics": [
+                    {
+                        name: "IMO (International Math Olympiad - SOF)",
+                        details: "Primary level mathematics olympiad focusing on arithmetic, basic geometry, logical reasoning, and problem-solving skills. Includes puzzles and mathematical games appropriate for young learners to develop numerical literacy.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/imo",
+                        icon: "calculator"
+                    }
+                ],
+                "computer": [
+                    {
+                        name: "NCO (National Cyber Olympiad - SOF)",
+                        details: "Introduction to basic computer concepts, digital literacy, and fundamental IT skills. Covers computer basics, internet safety, simple programming concepts, and digital citizenship for young students.",
+                        level: "School → National",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nco",
+                        icon: "laptop-code"
+                    }
+                ],
+                "english": [
+                    {
+                        name: "IEO (International English Olympiad)",
+                        details: "English language olympiad focusing on vocabulary building, basic grammar, reading comprehension, and fundamental writing skills. Includes storytelling and creative expression suitable for primary school students.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/ieo",
+                        icon: "book-open"
+                    }
+                ],
+                "general": [
+                    {
+                        name: "IGO (International General Knowledge Olympiad)",
+                        details: "General awareness competition covering current affairs, history, geography, and basic science facts. Helps young students develop awareness about the world around them.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/igo",
+                        icon: "globe-asia"
+                    }
+                ]
+            },
+            "6-8": {
+                "science": [
+                    {
+                        name: "NSO (National Science Olympiad)",
+                        details: "Middle school science olympiad with increased complexity in Physics, Chemistry, Biology covering NCERT curriculum and beyond. Develops analytical thinking, scientific reasoning, and practical application of concepts.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nso",
+                        icon: "atom"
+                    }
+                ],
+                "mathematics": [
+                    {
+                        name: "IMO (International Math Olympiad - SOF)",
+                        details: "Middle school mathematics covering pre-algebra, geometry, number theory, and intermediate problem-solving. Prepares students for higher-level mathematical competitions with structured reasoning exercises.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/imo",
+                        icon: "calculator"
+                    },
+                    {
+                        name: "PRMO (Pre-Regional Math Olympiad)",
+                        details: "Entry point for serious mathematics olympiad pathway. First stage towards representing India in International Mathematical Olympiad (IMO). Focuses on mathematical reasoning and proof techniques.",
+                        level: "National → International (via RMO, INMO)",
+                        eligibility: "Class 8-12",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.mtai.org.in/prmo",
+                        icon: "square-root-alt"
+                    }
+                ],
+                "computer": [
+                    {
+                        name: "NCO (National Cyber Olympiad - SOF)",
+                        details: "Intermediate computer science concepts including programming fundamentals, basic algorithms, data organization, and introduction to emerging technologies like AI and robotics.",
+                        level: "School → National",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nco",
+                        icon: "laptop-code"
+                    }
+                ],
+                "english": [
+                    {
+                        name: "IEO (International English Olympiad)",
+                        details: "Advanced English language skills including literature appreciation, creative writing, advanced grammar concepts, and critical thinking through language. Emphasizes communication and expression.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/ieo",
+                        icon: "book-open"
+                    }
+                ],
+                "astronomy": [
+                    {
+                        name: "IAO (International Astronomy Olympiad)",
+                        details: "Introduction to astronomy and space science for middle school students. Covers basic concepts of celestial objects, solar system, and observational astronomy.",
+                        level: "School → International",
+                        eligibility: "Class 5-12",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "star"
+                    }
+                ]
+            },
+            "9-10": {
+                "science": [
+                    {
+                        name: "NSO (National Science Olympiad)",
+                        details: "High school level science olympiad with board exam standard questions and beyond. Comprehensive coverage of Physics, Chemistry, Biology with practical applications and real-world problem solving.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nso",
+                        icon: "flask"
+                    },
+                    {
+                        name: "NSEJS (National Standard Exam - Junior Science)",
+                        details: "Gateway to Indian National Science Olympiad program. Multi-disciplinary exam covering Physics, Chemistry, Biology, and Mathematics. Tests conceptual understanding and analytical skills.",
+                        level: "National → International (via INO)",
+                        eligibility: "Class 9-10",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "microscope"
+                    },
+                    {
+                        name: "INO (Indian National Olympiad)",
+                        details: "Elite science olympiad program leading to international representation in IPhO, IChO, IBO, etc. Requires qualification via NSEJS/NSEA/NSEP. Intensive training and mentorship provided.",
+                        level: "National → International (IPhO, IBO, etc.)",
+                        eligibility: "Qualify via NSEJS/NSEA/NSEP",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "medal"
+                    }
+                ],
+                "mathematics": [
+                    {
+                        name: "IMO (International Math Olympiad - SOF)",
+                        details: "Advanced mathematical problem-solving for secondary school students. Covers complex algebra, geometry, number theory, and combinatorics with emphasis on logical reasoning and proof construction.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/imo",
+                        icon: "calculator"
+                    },
+                    {
+                        name: "PRMO (Pre-Regional Math Olympiad)",
+                        details: "Critical stage for mathematics olympiad aspirants. Success here leads to RMO and potential international representation. Focuses on mathematical creativity and problem-solving strategies.",
+                        level: "National → International (via RMO, INMO)",
+                        eligibility: "Class 8-12",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.mtai.org.in/prmo",
+                        icon: "square-root-alt"
+                    },
+                    {
+                        name: "RMO (Regional Math Olympiad)",
+                        details: "Regional level mathematics olympiad for students who qualify PRMO. Gateway to Indian National Mathematical Olympiad (INMO). Requires advanced mathematical maturity and proof-writing skills.",
+                        level: "Regional → National",
+                        eligibility: "Qualify via PRMO",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "chart-line"
+                    }
+                ],
+                "computer": [
+                    {
+                        name: "NCO (National Cyber Olympiad - SOF)",
+                        details: "High-level computer science olympiad covering programming concepts, algorithms, data structures, cybersecurity fundamentals, and introduction to artificial intelligence and machine learning.",
+                        level: "School → National",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nco",
+                        icon: "laptop-code"
+                    },
+                    {
+                        name: "ZCO (Zonal Computing Olympiad)",
+                        details: "Programming olympiad focusing on algorithmic problem-solving and competitive programming. First step towards International Olympiad in Informatics (IOI). Requires strong programming and logical thinking skills.",
+                        level: "National → IOI",
+                        eligibility: "School students",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.iarcs.org.in/zco",
+                        icon: "code"
+                    }
+                ],
+                "astronomy": [
+                    {
+                        name: "NSEA (National Standard Exam in Astronomy)",
+                        details: "Astronomy and astrophysics competition covering celestial mechanics, observational astronomy, and basic astrophysics concepts. Leads to International Astronomy Olympiad participation.",
+                        level: "National → International",
+                        eligibility: "Class 12 & below",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "star"
+                    }
+                ]
+            },
+            "11-12": {
+                "science": [
+                    {
+                        name: "NSO (National Science Olympiad)",
+                        details: "Senior secondary science olympiad with advanced Physics, Chemistry, Biology concepts. Excellent preparation for competitive exams like JEE, NEET while developing research aptitude and scientific thinking.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nso",
+                        icon: "flask"
+                    },
+                    {
+                        name: "NSEJS (National Standard Exam - Junior Science)",
+                        details: "Final opportunity for NSEJS participation. Multi-disciplinary science exam that can lead to international science olympiad representation. Gateway to prestigious research opportunities.",
+                        level: "National → International (via INO)",
+                        eligibility: "Class 9-10",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "microscope"
+                    },
+                    {
+                        name: "INO (Indian National Olympiad)",
+                        details: "Premier science olympiad program. Students can compete in Physics (IPhO), Chemistry (IChO), Biology (IBO), and Astronomy (IAO) olympiads. Intensive training with leading scientists and researchers.",
+                        level: "National → International (IPhO, IBO, etc.)",
+                        eligibility: "Qualify via NSEJS/NSEA/NSEP",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "medal"
+                    },
+                    {
+                        name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
+                        details: "National fellowship program for students with research aptitude in basic sciences. Provides substantial scholarship, research opportunities, and mentorship in premier institutes like IISc and IISERs.",
+                        level: "National Fellowship",
+                        eligibility: "Class 12 & UG",
+                        organizer: "IISc (Indian Institute of Science)",
+                        website: "https://kvpy.iisc.ac.in",
+                        icon: "graduation-cap"
+                    }
+                ],
+                "mathematics": [
+                    {
+                        name: "IMO (International Math Olympiad - SOF)",
+                        details: "Final year eligibility for SOF mathematics olympiad. Advanced mathematical concepts and problem-solving for college-bound students. Covers calculus, advanced algebra, and mathematical reasoning.",
+                        level: "School → International",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/imo",
+                        icon: "calculator"
+                    },
+                    {
+                        name: "PRMO (Pre-Regional Math Olympiad)",
+                        details: "Last opportunity for PRMO participation. Critical for students aiming for international mathematical olympiad representation. Requires mastery of advanced mathematical concepts and proof techniques.",
+                        level: "National → International (via RMO, INMO)",
+                        eligibility: "Class 8-12",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.mtai.org.in/prmo",
+                        icon: "square-root-alt"
+                    },
+                    {
+                        name: "RMO (Regional Math Olympiad)",
+                        details: "Elite mathematics competition leading to INMO. Represents the highest level of school mathematics in India. Success opens doors to mathematical research and advanced study opportunities.",
+                        level: "Regional → National",
+                        eligibility: "Qualify via PRMO",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "chart-line"
+                    }
+                ],
+                "computer": [
+                    {
+                        name: "NCO (National Cyber Olympiad - SOF)",
+                        details: "Advanced computer science olympiad covering cutting-edge topics like machine learning, blockchain technology, advanced programming paradigms, and computational thinking for complex problem solving.",
+                        level: "School → National",
+                        eligibility: "Class 1-12",
+                        organizer: "SOF (Science Olympiad Foundation)",
+                        website: "https://sofworld.org/nco",
+                        icon: "laptop-code"
+                    },
+                    {
+                        name: "ZCO (Zonal Computing Olympiad)",
+                        details: "Premier programming olympiad for senior students. Success leads to Indian National Olympiad in Informatics (INOI) and potential IOI representation. Requires expertise in algorithms and data structures.",
+                        level: "National → IOI",
+                        eligibility: "School students",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.iarcs.org.in/zco",
+                        icon: "code"
+                    }
+                ],
+                "astronomy": [
+                    {
+                        name: "IAO (International Astronomy Olympiad)",
+                        details: "Advanced astronomy competition covering astrophysics, cosmology, and observational techniques. Top performers represent India at international astronomy olympiads.",
+                        level: "National → International",
+                        eligibility: "Class 12 & below",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "star"
+                    }
+                ]
+            },
+            "post-12": {
+                "undergraduate": [
+                    {
+                        name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
+                        details: "Continuing fellowship for undergraduate students in basic sciences. Provides research opportunities, financial support, and mentorship for students pursuing careers in scientific research.",
+                        level: "National Fellowship",
+                        eligibility: "UG students in Science",
+                        organizer: "IISc (Indian Institute of Science)",
+                        website: "https://kvpy.iisc.ac.in",
+                        icon: "graduation-cap"
+                    },
+                    {
+                        name: "Inter-University Physics Olympiad",
+                        details: "National-level physics competition for undergraduate students. Tests advanced problem-solving skills in classical and modern physics, often used as a qualifier for international competitions.",
+                        level: "National",
+                        eligibility: "UG Physics students",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "atom"
+                    },
+                    {
+                        name: "Inter-University Mathematics Olympiad",
+                        details: "Prestigious mathematics competition for undergraduate students. Covers advanced topics in pure and applied mathematics, serving as a platform for identifying mathematical talent.",
+                        level: "National",
+                        eligibility: "UG Mathematics students",
+                        organizer: "CMI (Chennai Mathematical Institute)",
+                        website: "https://www.cmi.ac.in",
+                        icon: "calculator"
+                    }
+                ],
+                "hackathons": [
+                    {
+                        name: "Smart India Hackathon (SIH)",
+                        details: "Largest national hackathon organized by the Government of India. Focuses on solving real-world problems through technology innovation with themes ranging from healthcare to smart cities.",
+                        level: "National",
+                        eligibility: "College students",
+                        organizer: "MHRD, Govt. of India",
+                        website: "https://sih.gov.in",
+                        icon: "laptop-medical"
+                    },
+                    {
+                        name: "Google Hash Code",
+                        details: "International team-based programming competition where teams solve complex engineering problems. Tests algorithmic thinking and teamwork under time constraints.",
+                        level: "International",
+                        eligibility: "16+ years",
+                        organizer: "Google",
+                        website: "https://codingcompetitions.withgoogle.com/hashcode",
+                        icon: "google"
+                    },
+                    {
+                        name: "Microsoft Imagine Cup",
+                        details: "Global technology competition where students create innovative solutions using Microsoft technologies. Categories include AI, Mixed Reality, and Social Impact.",
+                        level: "International",
+                        eligibility: "16+ years",
+                        organizer: "Microsoft",
+                        website: "https://imaginecup.microsoft.com",
+                        icon: "microsoft"
+                    },
+                    {
+                        name: "HackMIT",
+                        details: "Premier collegiate hackathon at MIT with participants from top universities worldwide. Focuses on creative problem-solving through technology.",
+                        level: "International",
+                        eligibility: "College students",
+                        organizer: "MIT",
+                        website: "https://hackmit.org",
+                        icon: "university"
+                    }
+                ]
+            }
+        };
+
+        function findOlympiads() {
+            const classLevel = document.getElementById('class-select').value;
+            const subject = document.getElementById('subject-select').value;
+            const resultsDiv = document.getElementById('results');
+            
+            if (!classLevel) {
+                alert('Please select your class level first');
+                return;
+            }
+            
+            resultsDiv.innerHTML = '';
+            
+            if (classLevel === 'post-12') {
+                renderPost12Results();
+                return;
+            }
+            
+            if (subject === 'all') {
+                renderAllSubjects(classLevel);
+            } else {
+                renderSubjectResults(classLevel, subject);
+            }
+        }
+        
+        function renderAllSubjects(classLevel) {
+            const resultsDiv = document.getElementById('results');
+            let hasResults = false;
+            
+            resultsDiv.innerHTML = `
+                <div class="results-header">
+                    <h2 class="results-title">All Olympiads for Class ${classLevel}</h2>
+                    <p class="results-subtitle">Showing all available competitions across subjects</p>
+                </div>
+            `;
+            
+            for (const subject in olympiadData[classLevel]) {
+                const olympiads = olympiadData[classLevel][subject];
+                if (olympiads.length > 0) {
+                    hasResults = true;
+                    const subjectName = getSubjectName(subject);
+                    
+                    const categorySection = document.createElement('div');
+                    categorySection.className = 'category-section';
+                    categorySection.innerHTML = `
+                        <div class="category-header">
+                            <i class="fas fa-${olympiads[0].icon}"></i> ${subjectName}
+                        </div>
+                        <div class="olympiad-grid" id="${subject}-grid"></div>
+                    `;
+                    
+                    resultsDiv.appendChild(categorySection);
+                    
+                    const gridDiv = document.getElementById(`${subject}-grid`);
+                    olympiads.forEach(olympiad => {
+                        gridDiv.appendChild(createOlympiadCard(olympiad));
+                    });
+                }
+            }
+            
+            if (!hasResults) {
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No Olympiads Found</h3>
+                        <p>We couldn't find any olympiads matching your criteria. Try selecting a different class or subject.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderSubjectResults(classLevel, subject) {
+            const resultsDiv = document.getElementById('results');
+            const olympiads = olympiadData[classLevel][subject] || [];
+            
+            if (olympiads.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No Olympiads Found</h3>
+                        <p>We couldn't find any ${getSubjectName(subject)} olympiads for Class ${classLevel}. Try selecting a different subject or class level.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const subjectName = getSubjectName(subject);
+            resultsDiv.innerHTML = `
+                <div class="results-header">
+                    <h2 class="results-title">${subjectName} Olympiads for Class ${classLevel}</h2>
+                    <p class="results-subtitle">Showing ${olympiads.length} competition${olympiads.length > 1 ? 's' : ''} in ${subjectName}</p>
+                </div>
+                <div class="category-section">
+                    <div class="category-header">
+                        <i class="fas fa-${olympiads[0].icon}"></i> ${subjectName} Competitions
+                    </div>
+                    <div class="olympiad-grid" id="subject-grid"></div>
+                </div>
+            `;
+            
+            const gridDiv = document.getElementById('subject-grid');
+            olympiads.forEach(olympiad => {
+                gridDiv.appendChild(createOlympiadCard(olympiad));
+            });
+        }
+        
+        function createOlympiadCard(olympiad) {
+            const card = document.createElement('div');
+            card.className = 'olympiad-card';
+            card.innerHTML = `
+                <h3 class="olympiad-name"><i class="fas fa-${olympiad.icon}"></i> ${olympiad.name}</h3>
+                <p class="olympiad-details">${olympiad.details}</p>
+                <div class="olympiad-meta">
+                    <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: ${olympiad.level}</div>
+                    <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: ${olympiad.eligibility}</div>
+                    <div class="meta-badge"><i class="fas fa-building"></i> Organizer: ${olympiad.organizer}</div>
+                    <a href="${olympiad.website}" target="_blank" class="website-link">
+                        <i class="fas fa-external-link-alt"></i> Visit Website
+                    </a>
+                </div>
+            `;
+            return card;
+        }
+        
+        function getSubjectName(subjectKey) {
+            const subjectNames = {
+                "science": "Science",
+                "mathematics": "Mathematics",
+                "computer": "Computer Science",
+                "english": "English",
+                "general": "General Knowledge",
+                "astronomy": "Astronomy"
+            };
+            return subjectNames[subjectKey] || subjectKey;
+        }
+        
+        function renderPost12Results() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="results-header">
+                    <h2 class="results-title">Post-Class 12 Opportunities</h2>
+                    <p class="results-subtitle">Competitions and programs for college students and beyond</p>
+                </div>
+                
+                <div class="post-12-section">
+                    <h3 class="post-12-title">Beyond School: Academic & Tech Competitions</h3>
+                    
+                    <div class="category-section">
+                        <div class="category-header">
+                            <i class="fas fa-graduation-cap"></i> Undergraduate Programs
+                        </div>
+                        <div class="olympiad-grid" id="undergraduate-grid"></div>
+                    </div>
+                    
+                    <div class="category-section">
+                        <div class="category-header">
+                            <i class="fas fa-laptop-code"></i> Hackathons & Tech Competitions
+                        </div>
+                        <div class="olympiad-grid" id="hackathons-grid"></div>
+                    </div>
+                    
+                    <div class="registration-info">
+                        <h3>Registration Tips for Post-Class 12</h3>
+                        <p>Most competitions for college students require direct registration through their official websites. Create accounts well before deadlines, prepare portfolios showcasing your projects and achievements, and join relevant student communities to stay updated. Many hackathons have rolling registration periods - apply early to secure your spot!</p>
+                    </div>
+                </div>
+            `;
+            
+            // Render undergraduate programs
+            const undergradGrid = document.getElementById('undergraduate-grid');
+            olympiadData['post-12']['undergraduate'].forEach(olympiad => {
+                undergradGrid.appendChild(createOlympiadCard(olympiad));
+            });
+            
+            // Render hackathons
+            const hackathonsGrid = document.getElementById('hackathons-grid');
+            olympiadData['post-12']['hackathons'].forEach(olympiad => {
+                hackathonsGrid.appendChild(createOlympiadCard(olympiad));
+            });
+        }
+    </script>
+</body>
+</html>
