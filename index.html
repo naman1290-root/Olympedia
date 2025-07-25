@@ -609,6 +609,126 @@
             margin-top: 20px;
         }
 
+        /* New enhanced features */
+        .stage-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .stage-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .stage-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+        
+        .stage-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .stage-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preparation-resources {
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .resource-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .prize-details {
+            background: #eff6ff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .date-badge {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .date-badge i {
+            color: var(--primary);
+        }
+        
+        .difficulty-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .intermediate {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+        
+        .advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
         /* Tablet and Desktop Styles */
         @media (min-width: 768px) {
             .container {
@@ -638,6 +758,10 @@
             
             .olympiad-grid {
                 grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            }
+            
+            .resource-list {
+                grid-template-columns: 1fr 1fr;
             }
             
             .olympiad-card {
@@ -738,6 +862,8 @@
                             <option value="english">English</option>
                             <option value="general">General Knowledge</option>
                             <option value="astronomy">Astronomy</option>
+                            <option value="geography">Geography</option>
+                            <option value="biotechnology">Biotechnology</option>
                         </select>
                     </div>
                 </div>
@@ -819,7 +945,38 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nso",
-                        icon: "flask"
+                        icon: "flask",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" },
+                            { name: "Level 2", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, laptops for top winners",
+                        preparation: {
+                            books: ["Science Olympiad Handbook", "NCERT Exemplar"],
+                            papers: "https://sofworld.org/nso/previous-papers",
+                            online: ["Olympiad Genius", "Olympiad Helper"]
+                        },
+                        difficulty: "beginner",
+                        important_dates: [
+                            { event: "Registration Deadline", date: "October 15" },
+                            { event: "Result Declaration", date: "February" }
+                        ]
+                    },
+                    {
+                        name: "GeoGenius Geography Olympiad",
+                        details: "National-level geography competition testing knowledge of Indian and world geography, maps, and environmental concepts. Focuses on developing spatial awareness and geographical reasoning.",
+                        level: "National",
+                        eligibility: "Class 2-12",
+                        organizer: "GeoGenius Foundation",
+                        website: "https://geogeniusindia.org",
+                        icon: "globe-asia",
+                        stages: [
+                            { name: "School Level", type: "Objective", month: "September" }
+                        ],
+                        fees: "₹100 per student",
+                        prizes: "Certificates, medals, educational trips",
+                        difficulty: "beginner"
                     }
                 ],
                 "mathematics": [
@@ -830,7 +987,29 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/imo",
-                        icon: "calculator"
+                        icon: "calculator",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "December" },
+                            { name: "Level 2", type: "Subjective", month: "February" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, scholarships",
+                        difficulty: "beginner"
+                    },
+                    {
+                        name: "Ramanujan Math Competition",
+                        details: "Innovative mathematics competition focusing on creative problem-solving for young students. Emphasizes conceptual understanding over rote learning.",
+                        level: "National",
+                        eligibility: "Class 1-8",
+                        organizer: "AMTI (Association of Maths Teachers of India)",
+                        website: "https://www.amtionline.com",
+                        icon: "square-root-alt",
+                        stages: [
+                            { name: "Single Stage", type: "Creative Problems", month: "August" }
+                        ],
+                        fees: "₹150 per student",
+                        prizes: "Certificates, medals, math kits",
+                        difficulty: "intermediate"
                     }
                 ],
                 "computer": [
@@ -841,7 +1020,13 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nco",
-                        icon: "laptop-code"
+                        icon: "laptop-code",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, tech gadgets",
+                        difficulty: "beginner"
                     }
                 ],
                 "english": [
@@ -852,7 +1037,13 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/ieo",
-                        icon: "book-open"
+                        icon: "book-open",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "October" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Certificates, books, scholarships",
+                        difficulty: "beginner"
                     }
                 ],
                 "general": [
@@ -863,7 +1054,13 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/igo",
-                        icon: "globe-asia"
+                        icon: "globe-asia",
+                        stages: [
+                            { name: "Single Stage", type: "Objective", month: "January" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Certificates, educational games",
+                        difficulty: "beginner"
                     }
                 ]
             },
@@ -876,7 +1073,30 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nso",
-                        icon: "atom"
+                        icon: "atom",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" },
+                            { name: "Level 2", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, laptops",
+                        difficulty: "intermediate"
+                    },
+                    {
+                        name: "NSEJS (National Standard Exam - Junior Science)",
+                        details: "Gateway to Indian National Science Olympiad program. Multi-disciplinary exam covering Physics, Chemistry, Biology, and Mathematics. Tests conceptual understanding and analytical skills.",
+                        level: "National → International (via INO)",
+                        eligibility: "Class 9-10",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "microscope",
+                        stages: [
+                            { name: "NSEJS", type: "Objective", month: "November" },
+                            { name: "INO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per subject",
+                        prizes: "Selection for INO, scholarships",
+                        difficulty: "advanced"
                     }
                 ],
                 "mathematics": [
@@ -887,7 +1107,14 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/imo",
-                        icon: "calculator"
+                        icon: "calculator",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "December" },
+                            { name: "Level 2", type: "Subjective", month: "February" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, scholarships",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "PRMO (Pre-Regional Math Olympiad)",
@@ -896,7 +1123,29 @@
                         eligibility: "Class 8-12",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://www.mtai.org.in/prmo",
-                        icon: "square-root-alt"
+                        icon: "square-root-alt",
+                        stages: [
+                            { name: "PRMO", type: "Subjective", month: "August" },
+                            { name: "RMO", type: "Subjective", month: "October" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for RMO, certificates",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "Ramanujan Math Competition",
+                        details: "Challenging mathematics competition focusing on creative problem-solving and mathematical exploration. Designed to identify and nurture mathematical talent in middle school students.",
+                        level: "National",
+                        eligibility: "Class 5-8",
+                        organizer: "AMTI (Association of Maths Teachers of India)",
+                        website: "https://www.amtionline.com",
+                        icon: "brain",
+                        stages: [
+                            { name: "Single Stage", type: "Creative Problems", month: "August" }
+                        ],
+                        fees: "₹150 per student",
+                        prizes: "Certificates, medals, math kits",
+                        difficulty: "intermediate"
                     }
                 ],
                 "computer": [
@@ -907,7 +1156,29 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nco",
-                        icon: "laptop-code"
+                        icon: "laptop-code",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, tech gadgets",
+                        difficulty: "intermediate"
+                    },
+                    {
+                        name: "Junior Hackathon",
+                        details: "Beginner-friendly coding competition where students solve real-world problems using basic programming concepts. Encourages computational thinking and teamwork.",
+                        level: "National",
+                        eligibility: "Class 5-8",
+                        organizer: "TechKids India",
+                        website: "https://techkidsindia.org",
+                        icon: "code",
+                        stages: [
+                            { name: "Online Round", type: "Project Submission", month: "March" },
+                            { name: "National Finals", type: "Live Coding", month: "May" }
+                        ],
+                        fees: "Free",
+                        prizes: "Certificates, coding kits, mentorship",
+                        difficulty: "beginner"
                     }
                 ],
                 "english": [
@@ -918,7 +1189,13 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/ieo",
-                        icon: "book-open"
+                        icon: "book-open",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "October" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Certificates, books, scholarships",
+                        difficulty: "intermediate"
                     }
                 ],
                 "astronomy": [
@@ -929,7 +1206,32 @@
                         eligibility: "Class 5-12",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "star"
+                        icon: "star",
+                        stages: [
+                            { name: "NSEA", type: "Objective", month: "November" },
+                            { name: "Orientation Camp", type: "Training", month: "April" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for international olympiad",
+                        difficulty: "intermediate"
+                    }
+                ],
+                "geography": [
+                    {
+                        name: "GeoGenius Geography Olympiad",
+                        details: "Comprehensive geography competition testing knowledge of physical, human, and environmental geography. Includes map-based questions and spatial analysis.",
+                        level: "National",
+                        eligibility: "Class 2-12",
+                        organizer: "GeoGenius Foundation",
+                        website: "https://geogeniusindia.org",
+                        icon: "map-marked-alt",
+                        stages: [
+                            { name: "School Level", type: "Objective", month: "September" },
+                            { name: "National Finals", type: "Subjective", month: "November" }
+                        ],
+                        fees: "₹100 per student",
+                        prizes: "Certificates, medals, educational trips",
+                        difficulty: "intermediate"
                     }
                 ]
             },
@@ -942,7 +1244,14 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nso",
-                        icon: "flask"
+                        icon: "flask",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" },
+                            { name: "Level 2", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, laptops",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "NSEJS (National Standard Exam - Junior Science)",
@@ -951,7 +1260,14 @@
                         eligibility: "Class 9-10",
                         organizer: "IAPT (Indian Association of Physics Teachers)",
                         website: "https://iapt.org.in",
-                        icon: "microscope"
+                        icon: "microscope",
+                        stages: [
+                            { name: "NSEJS", type: "Objective", month: "November" },
+                            { name: "INO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per subject",
+                        prizes: "Selection for INO, scholarships",
+                        difficulty: "advanced"
                     },
                     {
                         name: "INO (Indian National Olympiad)",
@@ -960,7 +1276,46 @@
                         eligibility: "Qualify via NSEJS/NSEA/NSEP",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal"
+                        icon: "medal",
+                        stages: [
+                            { name: "INO", type: "Subjective", month: "January" },
+                            { name: "OCSC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "NSEA (National Standard Exam in Astronomy)",
+                        details: "Astronomy and astrophysics competition covering celestial mechanics, observational astronomy, and basic astrophysics concepts. Leads to International Astronomy Olympiad participation.",
+                        level: "National → International",
+                        eligibility: "Class 12 & below",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "star",
+                        stages: [
+                            { name: "NSEA", type: "Objective", month: "November" },
+                            { name: "INAO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for international olympiad",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
+                        details: "National fellowship program for students with research aptitude in basic sciences. Provides substantial scholarship, research opportunities, and mentorship in premier institutes like IISc and IISERs.",
+                        level: "National Fellowship",
+                        eligibility: "Class 10-12",
+                        organizer: "IISc (Indian Institute of Science)",
+                        website: "https://kvpy.iisc.ac.in",
+                        icon: "graduation-cap",
+                        stages: [
+                            { name: "Aptitude Test", type: "Objective", month: "November" },
+                            { name: "Interview", type: "Personal", month: "March" }
+                        ],
+                        fees: "₹1000 (SC/ST/PwD waived)",
+                        prizes: "Scholarship up to ₹7000/month",
+                        difficulty: "advanced"
                     }
                 ],
                 "mathematics": [
@@ -971,7 +1326,14 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/imo",
-                        icon: "calculator"
+                        icon: "calculator",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "December" },
+                            { name: "Level 2", type: "Subjective", month: "February" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, scholarships",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "PRMO (Pre-Regional Math Olympiad)",
@@ -980,7 +1342,14 @@
                         eligibility: "Class 8-12",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://www.mtai.org.in/prmo",
-                        icon: "square-root-alt"
+                        icon: "square-root-alt",
+                        stages: [
+                            { name: "PRMO", type: "Subjective", month: "August" },
+                            { name: "RMO", type: "Subjective", month: "October" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for RMO, certificates",
+                        difficulty: "advanced"
                     },
                     {
                         name: "RMO (Regional Math Olympiad)",
@@ -989,7 +1358,30 @@
                         eligibility: "Qualify via PRMO",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "chart-line"
+                        icon: "chart-line",
+                        stages: [
+                            { name: "RMO", type: "Subjective", month: "October" },
+                            { name: "INMO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "Selection for INMO",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "INMO (Indian National Math Olympiad)",
+                        details: "Premier mathematics competition in India. Top performers are selected for International Mathematical Olympiad (IMO) training camp. Tests advanced problem-solving and proof-writing abilities.",
+                        level: "National → International",
+                        eligibility: "Qualify via RMO",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "medal",
+                        stages: [
+                            { name: "INMO", type: "Subjective", month: "January" },
+                            { name: "IMOTC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
                     }
                 ],
                 "computer": [
@@ -1000,7 +1392,13 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nco",
-                        icon: "laptop-code"
+                        icon: "laptop-code",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, tech gadgets",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "ZCO (Zonal Computing Olympiad)",
@@ -1009,18 +1407,100 @@
                         eligibility: "School students",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://www.iarcs.org.in/zco",
-                        icon: "code"
+                        icon: "code",
+                        stages: [
+                            { name: "ZCO", type: "Online Programming", month: "December" },
+                            { name: "INOI", type: "Advanced Programming", month: "February" }
+                        ],
+                        fees: "Free",
+                        prizes: "Selection for INOI",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "INOI (Indian National Olympiad in Informatics)",
+                        details: "Premier programming competition in India. Top performers are selected for International Olympiad in Informatics (IOI) training camp. Tests advanced algorithmic problem-solving skills.",
+                        level: "National → International",
+                        eligibility: "Qualify via ZCO",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.iarcs.org.in/inoi",
+                        icon: "medal",
+                        stages: [
+                            { name: "INOI", type: "Programming", month: "February" },
+                            { name: "IOITC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
                     }
                 ],
                 "astronomy": [
                     {
                         name: "NSEA (National Standard Exam in Astronomy)",
-                        details: "Astronomy and astrophysics competition covering celestial mechanics, observational astronomy, and basic astrophysics concepts. Leads to International Astronomy Olympiad participation.",
+                        details: "Comprehensive astronomy competition covering celestial mechanics, observational techniques, and astrophysics. Leads to International Astronomy Olympiad participation for top performers.",
                         level: "National → International",
                         eligibility: "Class 12 & below",
                         organizer: "IAPT (Indian Association of Physics Teachers)",
                         website: "https://iapt.org.in",
-                        icon: "star"
+                        icon: "star",
+                        stages: [
+                            { name: "NSEA", type: "Objective", month: "November" },
+                            { name: "INAO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for international olympiad",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "INAO (Indian National Astronomy Olympiad)",
+                        details: "Advanced astronomy competition for students who qualify NSEA. Covers astrophysics, cosmology, and observational techniques. Top performers represent India at international olympiads.",
+                        level: "National → International",
+                        eligibility: "Qualify via NSEA",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "medal",
+                        stages: [
+                            { name: "INAO", type: "Subjective", month: "January" },
+                            { name: "OCSC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
+                    }
+                ],
+                "biotechnology": [
+                    {
+                        name: "National Biotechnology Olympiad",
+                        details: "Competition testing knowledge of molecular biology, genetics, and biotechnological applications. Includes theoretical and practical components for aspiring biotechnologists.",
+                        level: "National",
+                        eligibility: "Class 9-12",
+                        organizer: "Biotech Research Society",
+                        website: "https://www.brs.org.in",
+                        icon: "dna",
+                        stages: [
+                            { name: "Theory Exam", type: "Objective", month: "October" },
+                            { name: "Practical Round", type: "Lab Skills", month: "December" }
+                        ],
+                        fees: "₹300 per student",
+                        prizes: "Certificates, lab internships",
+                        difficulty: "intermediate"
+                    }
+                ],
+                "geography": [
+                    {
+                        name: "GeoGenius Geography Olympiad",
+                        details: "Comprehensive geography competition testing advanced knowledge of physical, human, and environmental geography. Includes GIS applications and spatial analysis techniques.",
+                        level: "National",
+                        eligibility: "Class 2-12",
+                        organizer: "GeoGenius Foundation",
+                        website: "https://geogeniusindia.org",
+                        icon: "map-marked-alt",
+                        stages: [
+                            { name: "School Level", type: "Objective", month: "September" },
+                            { name: "National Finals", type: "Subjective", month: "November" }
+                        ],
+                        fees: "₹100 per student",
+                        prizes: "Certificates, medals, educational trips",
+                        difficulty: "intermediate"
                     }
                 ]
             },
@@ -1033,7 +1513,14 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nso",
-                        icon: "flask"
+                        icon: "flask",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" },
+                            { name: "Level 2", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, laptops",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "NSEJS (National Standard Exam - Junior Science)",
@@ -1042,7 +1529,14 @@
                         eligibility: "Class 9-10",
                         organizer: "IAPT (Indian Association of Physics Teachers)",
                         website: "https://iapt.org.in",
-                        icon: "microscope"
+                        icon: "microscope",
+                        stages: [
+                            { name: "NSEJS", type: "Objective", month: "November" },
+                            { name: "INO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per subject",
+                        prizes: "Selection for INO, scholarships",
+                        difficulty: "advanced"
                     },
                     {
                         name: "INO (Indian National Olympiad)",
@@ -1051,16 +1545,62 @@
                         eligibility: "Qualify via NSEJS/NSEA/NSEP",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "medal"
+                        icon: "medal",
+                        stages: [
+                            { name: "INO", type: "Subjective", month: "January" },
+                            { name: "OCSC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
                     },
                     {
                         name: "KVPY (Kishore Vaigyanik Protsahan Yojana)",
                         details: "National fellowship program for students with research aptitude in basic sciences. Provides substantial scholarship, research opportunities, and mentorship in premier institutes like IISc and IISERs.",
                         level: "National Fellowship",
-                        eligibility: "Class 12 & UG",
+                        eligibility: "Class 11-12 & UG",
                         organizer: "IISc (Indian Institute of Science)",
                         website: "https://kvpy.iisc.ac.in",
-                        icon: "graduation-cap"
+                        icon: "graduation-cap",
+                        stages: [
+                            { name: "Aptitude Test", type: "Objective", month: "November" },
+                            { name: "Interview", type: "Personal", month: "March" }
+                        ],
+                        fees: "₹1000 (SC/ST/PwD waived)",
+                        prizes: "Scholarship up to ₹7000/month",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "NSEP (National Standard Exam in Physics)",
+                        details: "Advanced physics competition covering classical and modern physics concepts. Leads to Indian National Physics Olympiad (INPhO) for potential international representation.",
+                        level: "National → International",
+                        eligibility: "Class 12 & below",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "atom",
+                        stages: [
+                            { name: "NSEP", type: "Objective", month: "November" },
+                            { name: "INPhO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for INPhO",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "NSEB (National Standard Exam in Biology)",
+                        details: "Comprehensive biology competition covering molecular biology, genetics, ecology, and evolution. Leads to Indian National Biology Olympiad (INBO) for potential international representation.",
+                        level: "National → International",
+                        eligibility: "Class 12 & below",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "dna",
+                        stages: [
+                            { name: "NSEB", type: "Objective", month: "November" },
+                            { name: "INBO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for INBO",
+                        difficulty: "advanced"
                     }
                 ],
                 "mathematics": [
@@ -1071,7 +1611,14 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/imo",
-                        icon: "calculator"
+                        icon: "calculator",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "December" },
+                            { name: "Level 2", type: "Subjective", month: "February" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, scholarships",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "PRMO (Pre-Regional Math Olympiad)",
@@ -1080,7 +1627,14 @@
                         eligibility: "Class 8-12",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://www.mtai.org.in/prmo",
-                        icon: "square-root-alt"
+                        icon: "square-root-alt",
+                        stages: [
+                            { name: "PRMO", type: "Subjective", month: "August" },
+                            { name: "RMO", type: "Subjective", month: "October" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for RMO, certificates",
+                        difficulty: "advanced"
                     },
                     {
                         name: "RMO (Regional Math Olympiad)",
@@ -1089,7 +1643,30 @@
                         eligibility: "Qualify via PRMO",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "chart-line"
+                        icon: "chart-line",
+                        stages: [
+                            { name: "RMO", type: "Subjective", month: "October" },
+                            { name: "INMO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "Selection for INMO",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "INMO (Indian National Math Olympiad)",
+                        details: "Premier mathematics competition in India. Top performers are selected for International Mathematical Olympiad (IMO) training camp. Tests advanced problem-solving and proof-writing abilities.",
+                        level: "National → International",
+                        eligibility: "Qualify via RMO",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://olympiads.hbcse.tifr.res.in",
+                        icon: "medal",
+                        stages: [
+                            { name: "INMO", type: "Subjective", month: "January" },
+                            { name: "IMOTC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
                     }
                 ],
                 "computer": [
@@ -1100,7 +1677,13 @@
                         eligibility: "Class 1-12",
                         organizer: "SOF (Science Olympiad Foundation)",
                         website: "https://sofworld.org/nco",
-                        icon: "laptop-code"
+                        icon: "laptop-code",
+                        stages: [
+                            { name: "Level 1", type: "Objective", month: "November" }
+                        ],
+                        fees: "₹125 per student",
+                        prizes: "Medals, certificates, tech gadgets",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "ZCO (Zonal Computing Olympiad)",
@@ -1109,18 +1692,100 @@
                         eligibility: "School students",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://www.iarcs.org.in/zco",
-                        icon: "code"
+                        icon: "code",
+                        stages: [
+                            { name: "ZCO", type: "Online Programming", month: "December" },
+                            { name: "INOI", type: "Advanced Programming", month: "February" }
+                        ],
+                        fees: "Free",
+                        prizes: "Selection for INOI",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "INOI (Indian National Olympiad in Informatics)",
+                        details: "Premier programming competition in India. Top performers are selected for International Olympiad in Informatics (IOI) training camp. Tests advanced algorithmic problem-solving skills.",
+                        level: "National → International",
+                        eligibility: "Qualify via ZCO",
+                        organizer: "HBCSE (Homi Bhabha Centre)",
+                        website: "https://www.iarcs.org.in/inoi",
+                        icon: "medal",
+                        stages: [
+                            { name: "INOI", type: "Programming", month: "February" },
+                            { name: "IOITC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
                     }
                 ],
                 "astronomy": [
                     {
-                        name: "IAO (International Astronomy Olympiad)",
-                        details: "Advanced astronomy competition covering astrophysics, cosmology, and observational techniques. Top performers represent India at international astronomy olympiads.",
+                        name: "NSEA (National Standard Exam in Astronomy)",
+                        details: "Advanced astronomy competition covering astrophysics, cosmology, and observational techniques. Leads to International Astronomy Olympiad participation for top performers.",
                         level: "National → International",
                         eligibility: "Class 12 & below",
+                        organizer: "IAPT (Indian Association of Physics Teachers)",
+                        website: "https://iapt.org.in",
+                        icon: "star",
+                        stages: [
+                            { name: "NSEA", type: "Objective", month: "November" },
+                            { name: "INAO", type: "Subjective", month: "January" }
+                        ],
+                        fees: "₹200 per student",
+                        prizes: "Selection for international olympiad",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "INAO (Indian National Astronomy Olympiad)",
+                        details: "Advanced astronomy competition for students who qualify NSEA. Covers astrophysics, cosmology, and observational techniques. Top performers represent India at international olympiads.",
+                        level: "National → International",
+                        eligibility: "Qualify via NSEA",
                         organizer: "HBCSE (Homi Bhabha Centre)",
                         website: "https://olympiads.hbcse.tifr.res.in",
-                        icon: "star"
+                        icon: "medal",
+                        stages: [
+                            { name: "INAO", type: "Subjective", month: "January" },
+                            { name: "OCSC", type: "Training Camp", month: "April" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "International representation",
+                        difficulty: "advanced"
+                    }
+                ],
+                "biotechnology": [
+                    {
+                        name: "National Biotechnology Olympiad",
+                        details: "Advanced competition testing knowledge of genetic engineering, bioinformatics, and biotechnological applications. Includes case studies and research components.",
+                        level: "National",
+                        eligibility: "Class 11-12",
+                        organizer: "Biotech Research Society",
+                        website: "https://www.brs.org.in",
+                        icon: "dna",
+                        stages: [
+                            { name: "Theory Exam", type: "Objective", month: "October" },
+                            { name: "Research Project", type: "Submission", month: "December" }
+                        ],
+                        fees: "₹300 per student",
+                        prizes: "Certificates, lab internships",
+                        difficulty: "advanced"
+                    }
+                ],
+                "geography": [
+                    {
+                        name: "GeoGenius Geography Olympiad",
+                        details: "Advanced geography competition testing expertise in geospatial analysis, climate science, and human-environment interactions. Includes GIS applications and fieldwork components.",
+                        level: "National",
+                        eligibility: "Class 2-12",
+                        organizer: "GeoGenius Foundation",
+                        website: "https://geogeniusindia.org",
+                        icon: "map-marked-alt",
+                        stages: [
+                            { name: "School Level", type: "Objective", month: "September" },
+                            { name: "National Finals", type: "Fieldwork", month: "November" }
+                        ],
+                        fees: "₹100 per student",
+                        prizes: "Certificates, medals, educational trips",
+                        difficulty: "advanced"
                     }
                 ]
             },
@@ -1133,7 +1798,14 @@
                         eligibility: "UG students in Science",
                         organizer: "IISc (Indian Institute of Science)",
                         website: "https://kvpy.iisc.ac.in",
-                        icon: "graduation-cap"
+                        icon: "graduation-cap",
+                        stages: [
+                            { name: "Aptitude Test", type: "Objective", month: "July" },
+                            { name: "Interview", type: "Personal", month: "September" }
+                        ],
+                        fees: "₹1000 (waived for SC/ST/PwD)",
+                        prizes: "Scholarship up to ₹7000/month",
+                        difficulty: "advanced"
                     },
                     {
                         name: "Inter-University Physics Olympiad",
@@ -1142,7 +1814,14 @@
                         eligibility: "UG Physics students",
                         organizer: "IAPT (Indian Association of Physics Teachers)",
                         website: "https://iapt.org.in",
-                        icon: "atom"
+                        icon: "atom",
+                        stages: [
+                            { name: "Theory Exam", type: "Subjective", month: "February" },
+                            { name: "Practical Round", type: "Lab Work", month: "March" }
+                        ],
+                        fees: "₹500 per student",
+                        prizes: "Certificates, research opportunities",
+                        difficulty: "advanced"
                     },
                     {
                         name: "Inter-University Mathematics Olympiad",
@@ -1151,7 +1830,29 @@
                         eligibility: "UG Mathematics students",
                         organizer: "CMI (Chennai Mathematical Institute)",
                         website: "https://www.cmi.ac.in",
-                        icon: "calculator"
+                        icon: "calculator",
+                        stages: [
+                            { name: "Single Stage", type: "Proof-Based", month: "March" }
+                        ],
+                        fees: "₹500 per student",
+                        prizes: "Certificates, research internships",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "ISI Entrance Exam",
+                        details: "Competitive entrance examination for admission to Indian Statistical Institute's prestigious Bachelor's and Master's programs in Statistics, Mathematics, and Computer Science.",
+                        level: "National",
+                        eligibility: "Class 12 & UG students",
+                        organizer: "Indian Statistical Institute",
+                        website: "https://www.isical.ac.in",
+                        icon: "chart-bar",
+                        stages: [
+                            { name: "Written Test", type: "Objective+Subjective", month: "May" },
+                            { name: "Interview", type: "Personal", month: "June" }
+                        ],
+                        fees: "₹1500 (₹750 for SC/ST/PwD)",
+                        prizes: "Admission to ISI programs",
+                        difficulty: "advanced"
                     }
                 ],
                 "hackathons": [
@@ -1162,7 +1863,14 @@
                         eligibility: "College students",
                         organizer: "MHRD, Govt. of India",
                         website: "https://sih.gov.in",
-                        icon: "laptop-medical"
+                        icon: "laptop-medical",
+                        stages: [
+                            { name: "Idea Submission", type: "Online", month: "January" },
+                            { name: "Grand Finale", type: "Onsite Hackathon", month: "March" }
+                        ],
+                        fees: "Free",
+                        prizes: "Cash prizes up to ₹1,00,000",
+                        difficulty: "intermediate"
                     },
                     {
                         name: "Google Hash Code",
@@ -1171,7 +1879,14 @@
                         eligibility: "16+ years",
                         organizer: "Google",
                         website: "https://codingcompetitions.withgoogle.com/hashcode",
-                        icon: "google"
+                        icon: "google",
+                        stages: [
+                            { name: "Online Qualification", type: "Programming", month: "February" },
+                            { name: "Final Round", type: "Onsite", month: "April" }
+                        ],
+                        fees: "Free",
+                        prizes: "Cash prizes, Google internships",
+                        difficulty: "advanced"
                     },
                     {
                         name: "Microsoft Imagine Cup",
@@ -1180,7 +1895,14 @@
                         eligibility: "16+ years",
                         organizer: "Microsoft",
                         website: "https://imaginecup.microsoft.com",
-                        icon: "microsoft"
+                        icon: "microsoft",
+                        stages: [
+                            { name: "National Finals", type: "Project Submission", month: "March" },
+                            { name: "World Finals", type: "Presentation", month: "May" }
+                        ],
+                        fees: "Free",
+                        prizes: "$100,000 prize pool",
+                        difficulty: "advanced"
                     },
                     {
                         name: "HackMIT",
@@ -1189,7 +1911,64 @@
                         eligibility: "College students",
                         organizer: "MIT",
                         website: "https://hackmit.org",
-                        icon: "university"
+                        icon: "university",
+                        stages: [
+                            { name: "Application", type: "Online", month: "July" },
+                            { name: "Hackathon", type: "Onsite", month: "September" }
+                        ],
+                        fees: "Free (travel grants available)",
+                        prizes: "Tech gadgets, internships",
+                        difficulty: "advanced"
+                    }
+                ],
+                "research": [
+                    {
+                        name: "IRIS National Fair",
+                        details: "National science research competition for undergraduate students to showcase innovative research projects. Provides platform for young researchers to connect with scientific community.",
+                        level: "National",
+                        eligibility: "UG science students",
+                        organizer: "Department of Science & Technology",
+                        website: "https://www.irisnationalfair.org",
+                        icon: "microscope",
+                        stages: [
+                            { name: "Project Submission", type: "Research Paper", month: "August" },
+                            { name: "National Fair", type: "Presentation", month: "December" }
+                        ],
+                        fees: "Free",
+                        prizes: "Research grants, publications",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "Intel International Science Fair",
+                        details: "Prestigious international science research competition for students. Indian qualifiers are selected through national-level science fairs and competitions.",
+                        level: "International",
+                        eligibility: "Class 9 to UG",
+                        organizer: "Society for Science",
+                        website: "https://www.societyforscience.org/isef",
+                        icon: "medal",
+                        stages: [
+                            { name: "National Fair", type: "Project Presentation", month: "January" },
+                            { name: "International Finals", type: "Global Competition", month: "May" }
+                        ],
+                        fees: "Free for qualifiers",
+                        prizes: "Scholarships up to $75,000",
+                        difficulty: "advanced"
+                    },
+                    {
+                        name: "DST Inspire Awards",
+                        details: "Innovation in Science Pursuit for Inspired Research (INSPIRE) program recognizes and supports young researchers in science. Includes scholarships and research grants.",
+                        level: "National",
+                        eligibility: "UG & PG science students",
+                        organizer: "Department of Science & Technology",
+                        website: "https://www.inspire-dst.gov.in",
+                        icon: "award",
+                        stages: [
+                            { name: "Application", type: "Online", month: "June" },
+                            { name: "Award Ceremony", type: "National", month: "December" }
+                        ],
+                        fees: "Free",
+                        prizes: "Scholarships, research funding",
+                        difficulty: "advanced"
                     }
                 ]
             }
@@ -1303,9 +2082,82 @@
         function createOlympiadCard(olympiad) {
             const card = document.createElement('div');
             card.className = 'olympiad-card';
+            
+            // Difficulty badge
+            let difficultyBadge = '';
+            if (olympiad.difficulty) {
+                difficultyBadge = `<span class="difficulty-badge ${olympiad.difficulty}">
+                    ${olympiad.difficulty.charAt(0).toUpperCase() + olympiad.difficulty.slice(1)}
+                </span>`;
+            }
+            
+            // Stages timeline
+            let stagesHTML = '';
+            if (olympiad.stages && olympiad.stages.length > 0) {
+                stagesHTML = `<div class="stage-timeline">
+                    <h4>Competition Stages:</h4>
+                    ${olympiad.stages.map(stage => `
+                        <div class="stage-item">
+                            <div class="stage-name">
+                                <i class="fas fa-${getStageIcon(stage.type)}"></i>
+                                ${stage.name}
+                            </div>
+                            <div>Type: ${stage.type}</div>
+                            <div>Month: ${stage.month}</div>
+                        </div>
+                    `).join('')}
+                </div>`;
+            }
+            
+            // Important dates
+            let datesHTML = '';
+            if (olympiad.important_dates && olympiad.important_dates.length > 0) {
+                datesHTML = `<div class="prize-details">
+                    <h4>Important Dates:</h4>
+                    <div class="badge-grid">
+                        ${olympiad.important_dates.map(date => `
+                            <div class="date-badge">
+                                <i class="fas fa-calendar-day"></i>
+                                <strong>${date.event}:</strong> ${date.date}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>`;
+            }
+            
+            // Prizes and fees
+            let prizesHTML = '';
+            if (olympiad.prizes || olympiad.fees) {
+                prizesHTML = `<div class="prize-details">
+                    ${olympiad.fees ? `<p><strong>Fees:</strong> ${olympiad.fees}</p>` : ''}
+                    ${olympiad.prizes ? `<p><strong>Prizes:</strong> ${olympiad.prizes}</p>` : ''}
+                </div>`;
+            }
+            
+            // Preparation resources
+            let prepHTML = '';
+            if (olympiad.preparation) {
+                prepHTML = `<div class="preparation-resources">
+                    <h4>Preparation Resources:</h4>
+                    ${olympiad.preparation.books ? `<p><strong>Recommended Books:</strong> ${olympiad.preparation.books.join(', ')}</p>` : ''}
+                    ${olympiad.preparation.papers ? `<p><strong>Previous Papers:</strong> <a href="${olympiad.preparation.papers}" target="_blank">Download here</a></p>` : ''}
+                    ${olympiad.preparation.online ? `<p><strong>Online Resources:</strong> ${olympiad.preparation.online.join(', ')}</p>` : ''}
+                </div>`;
+            }
+            
             card.innerHTML = `
-                <h3 class="olympiad-name"><i class="fas fa-${olympiad.icon}"></i> ${olympiad.name}</h3>
+                <h3 class="olympiad-name">
+                    <i class="fas fa-${olympiad.icon}"></i> 
+                    ${olympiad.name}
+                    ${difficultyBadge}
+                </h3>
                 <p class="olympiad-details">${olympiad.details}</p>
+                
+                ${stagesHTML}
+                ${datesHTML}
+                ${prizesHTML}
+                ${prepHTML}
+                
                 <div class="olympiad-meta">
                     <div class="meta-badge"><i class="fas fa-chart-line"></i> Level: ${olympiad.level}</div>
                     <div class="meta-badge"><i class="fas fa-user-check"></i> Eligibility: ${olympiad.eligibility}</div>
@@ -1318,6 +2170,22 @@
             return card;
         }
         
+        function getStageIcon(stageType) {
+            const icons = {
+                "Objective": "check-circle",
+                "Subjective": "pen-fancy",
+                "Online": "laptop",
+                "Project Submission": "file-upload",
+                "Programming": "code",
+                "Training": "chalkboard-teacher",
+                "Interview": "user-tie",
+                "Lab Work": "flask",
+                "Presentation": "presentation",
+                "Fieldwork": "map-marked-alt"
+            };
+            return icons[stageType] || "calendar-alt";
+        }
+        
         function getSubjectName(subjectKey) {
             const subjectNames = {
                 "science": "Science",
@@ -1325,7 +2193,12 @@
                 "computer": "Computer Science",
                 "english": "English",
                 "general": "General Knowledge",
-                "astronomy": "Astronomy"
+                "astronomy": "Astronomy",
+                "geography": "Geography",
+                "biotechnology": "Biotechnology",
+                "undergraduate": "Undergraduate Programs",
+                "hackathons": "Hackathons & Tech",
+                "research": "Research Competitions"
             };
             return subjectNames[subjectKey] || subjectKey;
         }
@@ -1355,6 +2228,13 @@
                         <div class="olympiad-grid" id="hackathons-grid"></div>
                     </div>
                     
+                    <div class="category-section">
+                        <div class="category-header">
+                            <i class="fas fa-microscope"></i> Research Competitions
+                        </div>
+                        <div class="olympiad-grid" id="research-grid"></div>
+                    </div>
+                    
                     <div class="registration-info">
                         <h3>Registration Tips for Post-Class 12</h3>
                         <p>Most competitions for college students require direct registration through their official websites. Create accounts well before deadlines, prepare portfolios showcasing your projects and achievements, and join relevant student communities to stay updated. Many hackathons have rolling registration periods - apply early to secure your spot!</p>
@@ -1372,6 +2252,12 @@
             const hackathonsGrid = document.getElementById('hackathons-grid');
             olympiadData['post-12']['hackathons'].forEach(olympiad => {
                 hackathonsGrid.appendChild(createOlympiadCard(olympiad));
+            });
+            
+            // Render research competitions
+            const researchGrid = document.getElementById('research-grid');
+            olympiadData['post-12']['research'].forEach(olympiad => {
+                researchGrid.appendChild(createOlympiadCard(olympiad));
             });
         }
     </script>
